@@ -12,9 +12,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yx.personal.ganhuo.R;
 import com.yx.personal.ganhuo.Utils.AppManager;
-import com.yx.personal.ganhuo.Utils.SystemBarTintManager;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -28,10 +28,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(getContentView());
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
-        }
 
         initActionBar();
 
@@ -64,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //see {https://github.com/jgilfelt/SystemBarTint}
         SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
+        tintManager.setNavigationBarTintEnabled(true);
         tintManager.setStatusBarTintResource(R.color.colorPrimaryDark);
     }
 
@@ -118,18 +115,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             mProgressDialog.dismiss();
     }
 
-    @TargetApi(19)
-    private void setTranslucentStatus(boolean on) {
-        Window win = getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
 
     @Override
     protected void onDestroy() {

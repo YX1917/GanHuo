@@ -1,5 +1,6 @@
-package com.yx.personal.ganhuo;
+package com.yx.personal.ganhuo.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.yx.personal.ganhuo.Activity.BaseActivity;
+import com.yx.personal.ganhuo.Fragment.FragmentOne;
+import com.yx.personal.ganhuo.R;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,18 +75,17 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
+        if (id == R.id.nav_camara) {startActivity(new Intent(MainActivity.this,TestActivity.class));
         } else if (id == R.id.nav_gallery) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_slideshow) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_manage) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_share) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_send) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
