@@ -1,7 +1,5 @@
 package com.yx.personal.ganhuo.NetWork;
 
-import android.util.Log;
-
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
