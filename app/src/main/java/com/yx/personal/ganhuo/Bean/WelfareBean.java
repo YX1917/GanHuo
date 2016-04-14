@@ -43,6 +43,8 @@ public class WelfareBean {
         this.results = results;
     }
 
+    
+
     public static class ResultsBean {
         private String _id;
         private String createdAt;

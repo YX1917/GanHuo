@@ -26,9 +26,9 @@ public class ApiCall {
 	}
 
 
-	public static Call RequestWelfare() {
+	public static Call RequestWelfare(int page) {
 
-		Request request = new Request.Builder().url("http://gank.io/api/data/福利/10/1")
+		Request request = new Request.Builder().url("http://gank.io/api/data/福利/10/"+page)
 				.build();
 
 		return getInstance().newCall(request);

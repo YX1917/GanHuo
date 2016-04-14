@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.MyViewHolder> {
     private Context mContext;
-    private WelfareBean welfareBean;
+    private List<WelfareBean.ResultsBean> welfareBeanList;
 
-    public FragmentAdapter(Context mContext, WelfareBean welfareBean) {
+    public FragmentAdapter(Context mContext, List<WelfareBean.ResultsBean> welfareBeanList ) {
         this.mContext = mContext;
-        this.welfareBean = welfareBean;
+        this.welfareBeanList = welfareBeanList;
     }
 
     @Override
@@ -37,13 +37,13 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.tv.setText(welfareBean.getResults().get(position).getCreatedAt());
-        holder.draweeView.setImageURI(Uri.parse(welfareBean.getResults().get(position).getUrl()));
+        holder.tv.setText(welfareBeanList.get(position).getCreatedAt());
+        holder.draweeView.setImageURI(Uri.parse(welfareBeanList.get(position).getUrl()));
     }
 
     @Override
     public int getItemCount() {
-        return welfareBean.getResults().size();
+        return welfareBeanList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
