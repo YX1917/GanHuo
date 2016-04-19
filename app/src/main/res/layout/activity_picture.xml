@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#44ff0000"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_xxs"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    tools:context="com.yx.personal.ganhuo.Activity.PictureActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/id_num"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="1" />
+    <include layout="@layout/toolbar" />
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/my_image_view"
+        android:id="@+id/draweeview_picture_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         fresco:viewAspectRatio="0.75"
@@ -27,4 +22,6 @@
         fresco:failureImage="@drawable/icon_failure"
         fresco:failureImageScaleType="centerCrop"
         />
+
+
 </LinearLayout>

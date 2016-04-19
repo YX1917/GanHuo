@@ -1,15 +1,17 @@
 package com.yx.personal.ganhuo.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
 import com.yx.personal.ganhuo.Adapter.FragmentAdapter;
@@ -35,6 +37,9 @@ public class FragmentOne extends Fragment {
     private int lastVisibleItem;
     private int page = 1;//初始请求页码
 
+    private static Handler myHandler;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,12 +50,34 @@ public class FragmentOne extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Fresco.initialize(getActivity());
+        initHandler();
         initOkHttpCall();
         initView(view);
-        ApiCall.RequestWelfare(page).enqueue(okHttpCallback);
 
 
+    }
+
+
+    private void initHandler() {
+        myHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        mRecyclerView.setAdapter(fragmentAdapter);
+                        mSwipeRefreshWidget.setRefreshing(false);
+                        page++;
+                        Log.e("TAG","1信息"+page);
+                        break;
+                    case 2:
+                        fragmentAdapter.notifyDataSetChanged();
+                        mSwipeRefreshWidget.setRefreshing(false);
+                        page++;
+                        Log.e("TAG","2信息"+page);
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
 
     /**
@@ -108,24 +135,28 @@ public class FragmentOne extends Fragment {
                 if (welfareBean.getResults() == null) {
                     welfareBean = backBean;
                     fragmentAdapter = new FragmentAdapter(getActivity(), welfareBean.getResults());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRecyclerView.setAdapter(fragmentAdapter);
-                            mSwipeRefreshWidget.setRefreshing(false);
-                            page++;
-                        }
-                    });
+                    myHandler.sendEmptyMessage(1);
+                    Log.e("TAG","welfareBean.getResults() == null");
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mRecyclerView.setAdapter(fragmentAdapter);
+//                            mSwipeRefreshWidget.setRefreshing(false);
+//                            page++;
+//                        }
+//                    });
                 } else {
                     welfareBean.getResults().addAll(backBean.getResults());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            fragmentAdapter.notifyDataSetChanged();
-                            mSwipeRefreshWidget.setRefreshing(false);
-                            page++;
-                        }
-                    });
+                    myHandler.sendEmptyMessage(2);
+                    Log.e("TAG", "welfareBean.getResults() != null");
+//                    getActivity().runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            fragmentAdapter.notifyDataSetChanged();
+//                            mSwipeRefreshWidget.setRefreshing(false);
+//                            page++;
+//                        }
+//                    });
                 }
 
             }
