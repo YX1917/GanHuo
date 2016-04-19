@@ -52,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             actionBar = getSupportActionBar();
             if(actionBar!=null ){
                 //设置返回按钮
-                //actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+//                actionBar.setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
                 actionBar.setDisplayHomeAsUpEnabled(true);
             }
         }
@@ -66,6 +66,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void setIsShowBack(boolean isShow) {
         actionBar.setDisplayHomeAsUpEnabled(isShow);
+    }
+
+    protected Toolbar getToolBar() {
+        return toolbar;
     }
 
     /**

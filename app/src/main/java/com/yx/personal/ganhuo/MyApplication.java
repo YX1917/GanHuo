@@ -3,6 +3,7 @@ package com.yx.personal.ganhuo;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 
 
@@ -19,6 +20,7 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
         LeakCanary.install(this);
+        Fresco.initialize(this);
 
     }
 
