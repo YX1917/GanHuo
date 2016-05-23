@@ -2,10 +2,8 @@ package com.yx.personal.ganhuo.Activity;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -72,7 +70,7 @@ public class PictureActivity extends BaseActivity {
         String fileName ="dsfg" + ".jpg";
         File newfile = new File(appDir, fileName);
         try {
-            FileOutputStream fos = new FileOutputStream(file);
+            FileOutputStream fos = new FileOutputStream(newfile);
             assert bitmap != null;
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
