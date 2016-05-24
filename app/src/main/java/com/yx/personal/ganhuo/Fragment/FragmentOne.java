@@ -137,26 +137,10 @@ public class FragmentOne extends Fragment {
                     fragmentAdapter = new FragmentAdapter(getActivity(), welfareBean.getResults());
                     myHandler.sendEmptyMessage(1);
                     Log.e("TAG","welfareBean.getResults() == null");
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            mRecyclerView.setAdapter(fragmentAdapter);
-//                            mSwipeRefreshWidget.setRefreshing(false);
-//                            page++;
-//                        }
-//                    });
                 } else {
                     welfareBean.getResults().addAll(backBean.getResults());
                     myHandler.sendEmptyMessage(2);
                     Log.e("TAG", "welfareBean.getResults() != null");
-//                    getActivity().runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            fragmentAdapter.notifyDataSetChanged();
-//                            mSwipeRefreshWidget.setRefreshing(false);
-//                            page++;
-//                        }
-//                    });
                 }
 
             }

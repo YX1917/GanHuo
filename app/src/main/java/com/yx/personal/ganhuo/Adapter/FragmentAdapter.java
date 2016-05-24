@@ -52,7 +52,6 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv.setText(welfareBeanList.get(position).getCreatedAt());
-//        holder.draweeView.setImageURI(Uri.parse(welfareBeanList.get(position).getUrl()));
         final Uri uri = Uri.parse(welfareBeanList.get(position).getUrl());
         holder.draweeView.setImageURI(uri);
         holder.draweeView.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +100,6 @@ public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.MyView
                 .build();
        holder.draweeView.setController(draweeController);
 
-//        ImageLoadFresco.getInstance(mContext).ShowImg(holder.draweeView,Uri.parse("http://ww2.sinaimg.cn/large/7a8aed7bjw1f2w0qujoecj20f00kzjt.jpg"));
     }
 
     @Override
