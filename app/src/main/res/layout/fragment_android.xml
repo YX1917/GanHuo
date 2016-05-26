@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/my_image_view"
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_android_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fresco:viewAspectRatio="0.75"
-        fresco:actualImageScaleType="focusCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        fresco:placeholderImageScaleType="focusCrop"
-        fresco:progressBarImage="@drawable/icon_porgress_bar"
-        fresco:progressBarImageScaleType="focusCrop"
-        fresco:progressBarAutoRotateInterval="1000"
-        fresco:failureImage="@drawable/icon_failure"
-        fresco:failureImageScaleType="focusCrop"
-        fresco:retryImage="@drawable/icon_retry"
-        fresco:retryImageScaleType="focusCrop"
+        android:layout_height="match_parent">
 
-
-        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

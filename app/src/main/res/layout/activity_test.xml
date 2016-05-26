@@ -1,29 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent" >
 
-    tools:context="com.yx.personal.ganhuo.Activity.TestActivity">
-    <include layout="@layout/toolbar"/>
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/my_image_view"
+    <GridView
+        android:id="@+id/id_gridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fresco:viewAspectRatio="0.75"
-        fresco:actualImageScaleType="focusCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        fresco:placeholderImageScaleType="focusCrop"
-        fresco:progressBarImage="@drawable/icon_porgress_bar"
-        fresco:progressBarImageScaleType="focusCrop"
-        fresco:progressBarAutoRotateInterval="1000"
-        fresco:failureImage="@drawable/icon_failure"
-        fresco:failureImageScaleType="focusCrop"
-        fresco:retryImage="@drawable/icon_retry"
-        fresco:retryImageScaleType="focusCrop"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:clipChildren="true"
+        android:gravity="center"
+        android:horizontalSpacing="3dip"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="3dip" >
+    </GridView>
 
+    <RelativeLayout
+        android:id="@+id/id_bottom_ly"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:background="#e0000000"
+        android:clickable="true" >
 
-        />
+        <TextView
+            android:id="@+id/id_choose_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="所有图片"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/id_total_count"
+            android:layout_width="50dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="0张"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 
 </RelativeLayout>

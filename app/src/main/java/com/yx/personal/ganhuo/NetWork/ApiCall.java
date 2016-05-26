@@ -32,5 +32,13 @@ public class ApiCall {
 		return getInstance().newCall(request);
 	}
 
+	public static Call RequestAndroid(int page) {
+
+		Request request = new Request.Builder().url("http://gank.io/api/data/Android/10/"+page)
+				.build();
+
+		return getInstance().newCall(request);
+	}
+
 
 }

@@ -8,12 +8,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.facebook.binaryresource.FileBinaryResource;
 import com.facebook.cache.common.SimpleCacheKey;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.Utils.AppManager;
+import com.yx.personal.ganhuo.Utils.PictUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,6 +31,7 @@ public class PictureActivity extends BaseActivity {
     protected int getContentView() {
         return R.layout.activity_picture;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -43,6 +47,7 @@ public class PictureActivity extends BaseActivity {
         simpleDraweeView = (SimpleDraweeView) findViewById(R.id.draweeview_picture_show);
         url = getIntent().getStringExtra("url");
         simpleDraweeView.setImageURI(Uri.parse(url));
+        AppManager.getAppManager().addActivity(this);
 
 
     }
@@ -61,56 +66,21 @@ public class PictureActivity extends BaseActivity {
             case R.id.action_share:
                 Log.e("TAG", "action_share");
                 break;
+            case android.R.id.home:
+                AppManager.getAppManager().finishActivity();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
     private void saveImg() {
         FileBinaryResource resource = (FileBinaryResource) Fresco.getImagePipelineFactory().getMainDiskStorageCache().getResource(new SimpleCacheKey(url.toString()));
         File file = resource.getFile();
-        Log.e("TAG", file.getName());
-        File appDir = new File(Environment.getExternalStorageDirectory(), "GanHuo");
-        if(!appDir.exists()){
-            appDir.mkdir();
+        if(PictUtil.saveFile(file)){
+            Toast.makeText(PictureActivity.this,"图片已保存",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(PictureActivity.this,"图片保存失败，请重试",Toast.LENGTH_SHORT).show();
         }
-        String fileName =file.getName().replace(".cnt",".png");
-        File newFile = new File(appDir, fileName);
-        if (newFile.exists()) {
-            newFile.delete();
-        }
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
-        try {
-            fis = new FileInputStream(file);
-            fos = new FileOutputStream(newFile);
-            byte[] b = new byte[1024];
-            int len;
-            while ((len = fis.read(b)) != -1) {
-                fos.write(b, 0, len);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
-
     }
-
-
-
-
 }

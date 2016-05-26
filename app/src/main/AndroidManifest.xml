@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".Activity.PictureActivity" >
         </activity>
+        <activity android:name=".Picture.Main1Activity" >
+        </activity>
     </application>
 
 </manifest>

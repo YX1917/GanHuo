@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,25 +22,28 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.imagepipeline.image.QualityInfo;
 import com.yx.personal.ganhuo.Activity.PictureActivity;
+import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
 import com.yx.personal.ganhuo.Bean.WelfareBean;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.ImageLoadFresco;
 
 import java.util.List;
 
 /**
  * Created by YX on 16/4/12.
  */
-public class FragmentAdapter extends RecyclerView.Adapter<FragmentAdapter.MyViewHolder> {
+public class FuLiAdapter extends RecyclerView.Adapter<FuLiAdapter.MyViewHolder> {
     private Context mContext;
     private List<WelfareBean.ResultsBean> welfareBeanList;
     private ControllerListener controllerListener;
     private   DraweeController draweeController;
 
-    public FragmentAdapter(Context mContext, List<WelfareBean.ResultsBean> welfareBeanList) {
+    public FuLiAdapter(Context mContext, List<WelfareBean.ResultsBean> welfareBeanList) {
         this.mContext = mContext;
         this.welfareBeanList = welfareBeanList;
     }
+
+
+
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

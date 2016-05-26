@@ -11,10 +11,13 @@ import android.view.MenuItem;
 
 import com.yx.personal.ganhuo.Fragment.FragmentOne;
 import com.yx.personal.ganhuo.Fragment.FragmentTwo;
+import com.yx.personal.ganhuo.Picture.Main1Activity;
 import com.yx.personal.ganhuo.R;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected int getContentView() {
@@ -26,8 +29,8 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setTitle("I LOVE YOU");
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -76,11 +79,11 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camara) {
-            startActivity(new Intent(MainActivity.this, TestActivity.class));
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentTwo()).commit();
         } else if (id == R.id.nav_gallery) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_slideshow) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentTwo()).commit();
+            startActivity(new Intent(MainActivity.this, Main1Activity.class));
         } else if (id == R.id.nav_manage) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_share) {
