@@ -1,5 +1,6 @@
 package com.yx.personal.ganhuo.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,6 +18,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.okhttp.internal.spdy.FrameReader;
+import com.yx.personal.ganhuo.Activity.VideoInfoActivity;
 import com.yx.personal.ganhuo.Adapter.VideoAdapter;
 import com.yx.personal.ganhuo.Bean.DailyPicksBean;
 import com.yx.personal.ganhuo.NetWork.ApiCall;
@@ -88,6 +90,7 @@ public class FragmentVideo extends Fragment {
                 Log.e("FragmentVideo",(dailyPicksBean.getIssueList().get(0).getItemList().get(0).getData().getItemList().get(0).getData().getImage()));
                 mVideoAdapter = new VideoAdapter(getActivity(),dailyPicksBean);
                 mHandler.sendEmptyMessage(1);
+                setOnClickListener(mVideoAdapter,dailyPicksBean);
             }
 
             @Override
@@ -97,6 +100,25 @@ public class FragmentVideo extends Fragment {
             }
         };
     }
+
+    private void setOnClickListener(VideoAdapter mVideoAdapter, final DailyPicksBean dailyPicksBean) {
+        mVideoAdapter.setOnItemClickLitener(new VideoAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(),VideoInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("VideoInfo",dailyPicksBean.getIssueList().get(0).getItemList().get(position).getData());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
+    }
+
     /**
      * 利用反射使SwipeRefreshLayout进入界面就处于刷新状态
      *

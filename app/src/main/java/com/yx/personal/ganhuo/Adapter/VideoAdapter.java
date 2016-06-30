@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yx.personal.ganhuo.Bean.DailyPicksBean;
 import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.Utils.ToTimeString;
 
 /**
  * Created by YX on 16/6/29.
@@ -36,20 +37,29 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         if (viewType == ITEM_TYPE.ITEMHEDA.ordinal()) {
+//            holder = new HeadViewHolder(LayoutInflater.from(
+//                    mContext).inflate(R.layout.item_video_head, parent,
+//                    false));
             holder = new HeadViewHolder(LayoutInflater.from(
-                    mContext).inflate(R.layout.item_video_head, parent,
+                    mContext).inflate(R.layout.none, parent,
                     false));
         } else if (viewType == ITEM_TYPE.ITEMDETAIL.ordinal()) {
             holder = new DetailViewHolder(LayoutInflater.from(
                     mContext).inflate(R.layout.item_video_detail, parent,
                     false));
         }else if(viewType == ITEM_TYPE.ITEMBANNER.ordinal()){
+//            holder = new BannerViewHolder(LayoutInflater.from(
+//                    mContext).inflate(R.layout.item_video_banner, parent,
+//                    false));
             holder = new BannerViewHolder(LayoutInflater.from(
-                    mContext).inflate(R.layout.item_video_banner, parent,
+                    mContext).inflate(R.layout.none, parent,
                     false));
         }else if(viewType == ITEM_TYPE.ITEMTEXT.ordinal()){
+//            holder = new TextViewHolder(LayoutInflater.from(
+//                    mContext).inflate(R.layout.item_video_text, parent,
+//                    false));
             holder = new TextViewHolder(LayoutInflater.from(
-                    mContext).inflate(R.layout.item_video_text, parent,
+                    mContext).inflate(R.layout.none, parent,
                     false));
         }
 
@@ -58,26 +68,53 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         Log.e("onBindViewHolder",position+"");
             if(holder instanceof HeadViewHolder){
-                String url = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getItemList().get(0).getData().getImage();
-                ((HeadViewHolder) holder).draweeView.setImageURI(Uri.parse(url));
+//                String url = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getItemList().get(0).getData().getImage();
+//                ((HeadViewHolder) holder).draweeView.setImageURI(Uri.parse(url));
             }else if(holder instanceof DetailViewHolder){
                 String url = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getCover().getDetail();
                 ((DetailViewHolder) holder).draweeView.setImageURI(Uri.parse(url));
+                ((DetailViewHolder) holder).title.setText(mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getTitle());
+                ((DetailViewHolder) holder).type.setText("#"+mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getCategory());
+                ((DetailViewHolder) holder).time.setText(ToTimeString.toTimeString(mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getDuration()));
+                if (mOnItemClickListener != null)
+                {
+                    holder.itemView.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            int pos = holder.getLayoutPosition();
+                            mOnItemClickListener.onItemClick(holder.itemView, pos);
+                        }
+                    });
+
+                    holder.itemView.setOnLongClickListener(new View.OnLongClickListener()
+                    {
+                        @Override
+                        public boolean onLongClick(View v)
+                        {
+                            int pos = holder.getLayoutPosition();
+                            mOnItemClickListener.onItemLongClick(holder.itemView, pos);
+                            return false;
+                        }
+                    });
+                }
             }else if(holder instanceof BannerViewHolder){
-                String url = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getImage();
-                ((BannerViewHolder) holder).draweeView.setImageURI(Uri.parse(url));
+//                String url = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getImage();
+//                ((BannerViewHolder) holder).draweeView.setImageURI(Uri.parse(url));
             }else if(holder instanceof TextViewHolder){
-                String text = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getText();
-                ((TextViewHolder) holder).tv.setText(text);
+//                String text = mDailyPicksBean.getIssueList().get(0).getItemList().get(position).getData().getText();
+//                ((TextViewHolder) holder).tv.setText(text);
             }
     }
 
     @Override
     public int getItemCount() {
-        return mDailyPicksBean.getIssueList().get(0).getItemList().size();
+//        return mDailyPicksBean.getIssueList().get(0).getItemList().size();
+        return 6;
     }
 
     @Override
@@ -110,10 +147,17 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
     public class DetailViewHolder extends RecyclerView.ViewHolder {
         SimpleDraweeView draweeView;
+        TextView title;
+        TextView type;
+        TextView time;
 
         public DetailViewHolder(View itemView) {
             super(itemView);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.drawee_videoDetail_image);
+            title = (TextView) itemView.findViewById(R.id.tv_video_title);
+            type = (TextView) itemView.findViewById(R.id.tv_video_type);
+            time = (TextView) itemView.findViewById(R.id.tv_video_time);
+
         }
     }
 
@@ -133,5 +177,19 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.drawee_videoBanner_image);
         }
+    }
+
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(View view, int position);
+        void onItemLongClick(View view , int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener)
+    {
+        this.mOnItemClickListener = mOnItemClickListener;
     }
 }

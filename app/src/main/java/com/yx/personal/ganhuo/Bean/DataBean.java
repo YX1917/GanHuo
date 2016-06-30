@@ -1,11 +1,12 @@
 package com.yx.personal.ganhuo.Bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by YX on 16/6/29.
  */
-public class DataBean {
+public class DataBean implements Serializable{
 
 
     private String dataType;
@@ -41,7 +42,7 @@ public class DataBean {
         this.itemList = itemList;
     }
 
-    public static class ItemListBean {
+    public static class ItemListBean implements Serializable{
         private String type;
         /**
          * dataType : Banner
@@ -71,7 +72,7 @@ public class DataBean {
             this.data = data;
         }
 
-        public static class DataBodyBean {
+        public static class DataBodyBean implements Serializable{
             private String dataType;
             private String title;
             private String description;
@@ -406,7 +407,7 @@ public class DataBean {
         this.tags = tags;
     }
 
-    public static class ProviderBean {
+    public static class ProviderBean implements Serializable{
         private String name;
         private String alias;
         private String icon;
@@ -436,7 +437,7 @@ public class DataBean {
         }
     }
 
-    public static class CoverBean {
+    public static class CoverBean implements Serializable{
         private String feed;
         private String detail;
         private String blurred;
@@ -475,7 +476,7 @@ public class DataBean {
         }
     }
 
-    public static class WebUrlBean {
+    public static class WebUrlBean implements Serializable{
         private String raw;
         private String forWeibo;
 
@@ -496,7 +497,7 @@ public class DataBean {
         }
     }
 
-    public static class ConsumptionBean {
+    public static class ConsumptionBean implements Serializable{
         private int collectionCount;
         private int shareCount;
         private int playCount;
@@ -535,7 +536,7 @@ public class DataBean {
         }
     }
 
-    public static class PlayInfoBean {
+    public static class PlayInfoBean implements Serializable{
         private int height;
         private int width;
         private String name;
@@ -583,7 +584,7 @@ public class DataBean {
         }
     }
 
-    public static class TagsBean {
+    public static class TagsBean implements Serializable{
         private int id;
         private String name;
         private String actionUrl;

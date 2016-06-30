@@ -19,10 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TestActivity"></activity>
-        <activity android:name=".Activity.PictureActivity"></activity>
-        <activity android:name=".Picture.Main1Activity"></activity>
-        <activity android:name=".Activity.WebActivity"></activity>
+        <activity android:name=".Activity.PictureActivity" />
+        <activity android:name=".Activity.WebActivity" />
+        <activity android:name=".Activity.VideoInfoActivity"/>
     </application>
 
 </manifest>

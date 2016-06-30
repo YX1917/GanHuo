@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         fresco:viewAspectRatio="1.6"
         fresco:actualImageScaleType="centerCrop"
-        android:background="#8C8C8C"
+        android:background="@color/colorGray"
         />
 
 </LinearLayout>

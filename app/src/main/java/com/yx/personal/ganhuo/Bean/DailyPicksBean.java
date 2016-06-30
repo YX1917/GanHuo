@@ -1,11 +1,12 @@
 package com.yx.personal.ganhuo.Bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by YX on 16/6/28.
  */
-public class DailyPicksBean {
+public class DailyPicksBean implements Serializable{
 
 
     /**

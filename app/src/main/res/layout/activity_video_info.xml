@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yx.personal.ganhuo.Activity.VideoInfoActivity">
+
+    <include layout="@layout/toolbar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/drawee_videoInfo_play"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray"
+            app:actualImageScaleType="centerCrop" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_action_play" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/drawee_videoInfo_blurred"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray"
+            app:actualImageScaleType="centerCrop" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_s">
+
+            <TextView
+                android:id="@+id/tv_videoInfo_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_xs"
+                android:text="我是标题"
+                android:layout_margin="@dimen/margin_xxs"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_xl" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/margin_xxs"
+                android:background="@color/colorWhite" />
+
+            <LinearLayout
+                android:layout_margin="@dimen/margin_xxs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#类型"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="/"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="时间"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_type1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_m"
+                    android:background="@color/colorWhite_Gray"
+                    android:text="时间"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_type2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_m"
+                    android:background="@color/colorWhite_Gray"
+                    android:text="时间"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_type3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_m"
+                    android:background="@color/colorWhite_Gray"
+                    android:text="时间"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+
+                <TextView
+                    android:id="@+id/tv_videoInfo_type4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_m"
+                    android:background="@color/colorWhite_Gray"
+                    android:text="时间"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_l" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_margin="@dimen/margin_xxs"
+                android:id="@+id/tv_videoInfo_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间时间"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_m" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

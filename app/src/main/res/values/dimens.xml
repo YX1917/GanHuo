@@ -5,6 +5,8 @@
     <dimen name="text_size_m">14.0sp</dimen>
     <dimen name="text_size_l">16.0sp</dimen>
     <dimen name="text_size_xl">18.0sp</dimen>
+    <dimen name="text_size_xxl">24.0sp</dimen>
+    <dimen name="text_size_xxxl">36.0sp</dimen>
 
     <!-- margin -->
     <dimen name="margin_xxs">2.0dip</dimen>
