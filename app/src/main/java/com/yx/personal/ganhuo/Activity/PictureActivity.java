@@ -66,9 +66,6 @@ public class PictureActivity extends BaseActivity {
             case R.id.action_share:
                 Log.e("TAG", "action_share");
                 break;
-            case android.R.id.home:
-                AppManager.getAppManager().finishActivity();
-                break;
         }
 
         return super.onOptionsItemSelected(item);

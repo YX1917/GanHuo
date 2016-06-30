@@ -16,7 +16,7 @@
         fresco:actualImageScaleType="centerCrop"
         fresco:placeholderImage="@mipmap/ic_launcher"
         fresco:placeholderImageScaleType="centerCrop"
-        fresco:progressBarImage="@drawable/icon_porgress_bar"
+        fresco:progressBarImage="@drawable/icon_loading"
         fresco:progressBarImageScaleType="fitCenter"
         fresco:progressBarAutoRotateInterval="1000"
         fresco:failureImage="@drawable/icon_failure"

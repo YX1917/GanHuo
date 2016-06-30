@@ -29,7 +29,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yx.personal.ganhuo.Bean.TTest;
 import com.yx.personal.ganhuo.R;
 
 
@@ -139,7 +138,6 @@ public class Main1Activity extends Activity implements ListImageDirPopupWindow.O
         getImages();
         initEvent();
 
-        TTest TTest = new TTest();
     }
 
     /**

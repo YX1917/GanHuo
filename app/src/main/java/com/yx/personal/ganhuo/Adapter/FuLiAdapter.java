@@ -34,8 +34,6 @@ import java.util.List;
 public class FuLiAdapter extends RecyclerView.Adapter<FuLiAdapter.MyViewHolder> {
     private Context mContext;
     private List<WelfareBean.ResultsBean> welfareBeanList;
-    private ControllerListener controllerListener;
-    private   DraweeController draweeController;
 
     public FuLiAdapter(Context mContext, List<WelfareBean.ResultsBean> welfareBeanList) {
         this.mContext = mContext;
@@ -66,43 +64,7 @@ public class FuLiAdapter extends RecyclerView.Adapter<FuLiAdapter.MyViewHolder> 
                 mContext.startActivity(intent);
             }
         });
-        controllerListener = new BaseControllerListener<ImageInfo>() {
-            @Override
-            public void onFinalImageSet(
-                    String id,
-                    @Nullable ImageInfo imageInfo,
-                    @Nullable Animatable anim) {
-                if (imageInfo == null) {
-                    return;
-                }
-                QualityInfo qualityInfo = imageInfo.getQualityInfo();
-                FLog.d("Final image received! " +
-                                "Size %d x %d",
-                        "Quality level %d, good enough: %s, full quality: %s",
-                        imageInfo.getWidth(),
-                        imageInfo.getHeight(),
-                        qualityInfo.getQuality(),
-                        qualityInfo.isOfGoodEnoughQuality(),
-                        qualityInfo.isOfFullQuality());
-            }
 
-            @Override
-            public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
-                Log.e("TAG","Intermediate image received");
-            }
-
-            @Override
-            public void onFailure(String id, Throwable throwable) {
-                Log.e("TAG","加载失败");
-            }
-        };
-        draweeController = Fresco.newDraweeControllerBuilder()
-                .setUri(uri)
-                .setTapToRetryEnabled(true)
-                .setControllerListener(controllerListener)
-                .setOldController(holder.draweeView.getController())
-                .build();
-       holder.draweeView.setController(draweeController);
 
     }
 

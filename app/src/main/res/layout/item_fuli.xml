@@ -19,12 +19,12 @@
         android:layout_height="wrap_content"
         fresco:viewAspectRatio="0.75"
         fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher"
         fresco:placeholderImageScaleType="centerCrop"
-        fresco:progressBarImage="@drawable/icon_porgress_bar"
-        fresco:progressBarImageScaleType="fitCenter"
+        fresco:progressBarImage="@drawable/icon_loading"
+        fresco:progressBarImageScaleType="center"
         fresco:progressBarAutoRotateInterval="1000"
         fresco:failureImage="@drawable/icon_failure"
         fresco:failureImageScaleType="centerCrop"
+        android:background="#8C8C8C"
         />
 </LinearLayout>

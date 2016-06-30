@@ -1,5 +1,6 @@
 package com.yx.personal.ganhuo.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,9 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
+import com.yx.personal.ganhuo.Activity.WebActivity;
 import com.yx.personal.ganhuo.Adapter.AndroidAdapter;
 import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
 import com.yx.personal.ganhuo.NetWork.ApiCall;
@@ -99,6 +102,8 @@ public class FragmentTwo extends Fragment {
             }
         });
 
+
+
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_android_refresh);
         setRefreshing(mSwipeRefreshWidget, true, true);
 
@@ -124,15 +129,33 @@ public class FragmentTwo extends Fragment {
 
                     androidAdapter = new AndroidAdapter(getActivity(), androidInfoBean.getResults());
                     myHandler.sendEmptyMessage(1);
+                    setOnclickListener(androidAdapter);
                     Log.e("TAG", "welfareBean.getResults() == null"+backBean.toString());
                 } else {
                     androidInfoBean.getResults().addAll(backBean.getResults());
                     myHandler.sendEmptyMessage(2);
+                    setOnclickListener(androidAdapter);
                     Log.e("TAG", "welfareBean.getResults() != null");
                 }
 
             }
         };
+    }
+
+    private void setOnclickListener(AndroidAdapter androidAdapter) {
+        androidAdapter.setOnItemClickLitener(new AndroidAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("URL",androidInfoBean.getResults().get(position).getUrl());
+                getActivity().startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getActivity(),"长按",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**

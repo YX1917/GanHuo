@@ -11,13 +11,14 @@ import android.view.MenuItem;
 
 import com.yx.personal.ganhuo.Fragment.FragmentOne;
 import com.yx.personal.ganhuo.Fragment.FragmentTwo;
-import com.yx.personal.ganhuo.Picture.Main1Activity;
+import com.yx.personal.ganhuo.Fragment.FragmentVideo;
 import com.yx.personal.ganhuo.R;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+    private NavigationView  navigationView;
 
     @Override
     protected int getContentView() {
@@ -35,8 +36,11 @@ public class MainActivity extends BaseActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationView.setCheckedItem(R.id.nav_camara);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentTwo()).commit();
     }
 
 
@@ -83,7 +87,7 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_gallery) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_slideshow) {
-            startActivity(new Intent(MainActivity.this, Main1Activity.class));
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentVideo()).commit();
         } else if (id == R.id.nav_manage) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
         } else if (id == R.id.nav_share) {
