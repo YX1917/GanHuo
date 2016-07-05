@@ -12,12 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.gson.Gson;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.internal.spdy.FrameReader;
 import com.yx.personal.ganhuo.Activity.VideoInfoActivity;
 import com.yx.personal.ganhuo.Adapter.VideoAdapter;
 import com.yx.personal.ganhuo.Bean.DailyPicksBean;
@@ -27,6 +23,9 @@ import com.yx.personal.ganhuo.R;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by YX on 16/6/29.
@@ -86,17 +85,19 @@ public class FragmentVideo extends Fragment {
             @Override
             protected void handleApiSuccess(Response response) throws IOException {
                 Gson gson = new Gson();
-                DailyPicksBean dailyPicksBean = gson.fromJson(response.body().string(), DailyPicksBean.class);
-                Log.e("FragmentVideo",(dailyPicksBean.getIssueList().get(0).getItemList().get(0).getData().getItemList().get(0).getData().getImage()));
+                String s = response.body().string();
+                DailyPicksBean dailyPicksBean = gson.fromJson(s, DailyPicksBean.class);
+
+
+//                Log.e("FragmentVideo",(dailyPicksBean.getIssueList().get(0).getItemList().get(0).getData().getItemList().get(0).getData().getImage()));
                 mVideoAdapter = new VideoAdapter(getActivity(),dailyPicksBean);
                 mHandler.sendEmptyMessage(1);
                 setOnClickListener(mVideoAdapter,dailyPicksBean);
             }
 
             @Override
-            public void onFailure(Request request, IOException e) {
-                super.onFailure(request, e);
-                Log.e("FragmentVideo","失败");
+            public void onFailure(Call call, IOException e) {
+                super.onFailure(call, e);
             }
         };
     }

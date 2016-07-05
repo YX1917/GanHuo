@@ -1,16 +1,26 @@
 package com.yx.personal.ganhuo.Activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yx.personal.ganhuo.Bean.DataBean;
+import com.yx.personal.ganhuo.Media.VideoPlayView;
 import com.yx.personal.ganhuo.R;
 import com.yx.personal.ganhuo.Utils.AppManager;
 import com.yx.personal.ganhuo.Utils.ToTimeString;
+
+import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 public class VideoInfoActivity extends BaseActivity {
     private SimpleDraweeView mPlay;
@@ -24,6 +34,9 @@ public class VideoInfoActivity extends BaseActivity {
     private TextView mType4;
     private TextView mMessage;
     private TextView mTime;
+
+    private VideoPlayView videoItemView;
+    private FrameLayout fullScreen;
 
     @Override
     protected int getContentView() {
@@ -56,8 +69,8 @@ public class VideoInfoActivity extends BaseActivity {
         mType2 = (TextView) findViewById(R.id.tv_videoInfo_type2);
         mType3 = (TextView) findViewById(R.id.tv_videoInfo_type3);
         mType4 = (TextView) findViewById(R.id.tv_videoInfo_type4);
-        mTime= (TextView) findViewById(R.id.tv_videoInfo_time);
-        mMessage =(TextView) findViewById(R.id.tv_videoInfo_message);
+        mTime = (TextView) findViewById(R.id.tv_videoInfo_time);
+        mMessage = (TextView) findViewById(R.id.tv_videoInfo_message);
 
         mPlay.setImageURI(Uri.parse(mDataBean.getCover().getDetail()));
         mBlurred.setImageURI(Uri.parse(mDataBean.getCover().getBlurred()));
@@ -69,6 +82,22 @@ public class VideoInfoActivity extends BaseActivity {
         mType4.setText(mDataBean.getTags().get(3).getName());
         mTime.setText(ToTimeString.toTimeString(mDataBean.getDuration()));
         mMessage.setText(mDataBean.getDescription());
+
+        mPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoInfoActivity.this, PlayVideoActivity.class);
+                intent.putExtra("URL", mDataBean.getPlayInfo().get(0).getUrl());
+                startActivity(intent);
+//                videoItemView.start(mDataBean.getPlayInfo().get(0).getUrl());
+//                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            }
+        });
+
+
+        fullScreen = (FrameLayout) findViewById(R.id.full_screen);
+        videoItemView = new VideoPlayView(this);
+
     }
 
     /**
@@ -77,6 +106,50 @@ public class VideoInfoActivity extends BaseActivity {
     private void initToolBar() {
         setTitle("精选视频");
         setIsShowBack(true);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        videoItemView.stop();
+        videoItemView.release();
+        videoItemView.onDestroy();
+        videoItemView = null;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (videoItemView != null) {
+            videoItemView.stop();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.e("VideoActivity","转屏监听");
+        if (videoItemView != null) {
+            videoItemView.onChanged(newConfig);
+            if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                fullScreen.setVisibility(View.GONE);
+
+
+                videoItemView.setContorllerVisiable();
+            } else {
+                ViewGroup viewGroup = (ViewGroup) videoItemView.getParent();
+                if (viewGroup == null)
+                    return;
+                viewGroup.removeAllViews();
+                fullScreen.addView(videoItemView);
+
+                fullScreen.setVisibility(View.VISIBLE);
+            }
+        } else {
+
+            fullScreen.setVisibility(View.GONE);
+        }
     }
 
 

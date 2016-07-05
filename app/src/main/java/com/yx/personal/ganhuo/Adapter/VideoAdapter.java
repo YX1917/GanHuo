@@ -114,7 +114,13 @@ public class VideoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
 //        return mDailyPicksBean.getIssueList().get(0).getItemList().size();
-        return 6;
+        int size = 0;
+        for(int i= 0;i<mDailyPicksBean.getIssueList().get(0).getItemList().size();i++){
+            if(mDailyPicksBean.getIssueList().get(0).getItemList().get(i).getType().equals("video")){
+                size++;
+            }
+        }
+        return size;
     }
 
     @Override

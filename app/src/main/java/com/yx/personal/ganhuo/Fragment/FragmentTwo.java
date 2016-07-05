@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.squareup.okhttp.Response;
 import com.yx.personal.ganhuo.Activity.WebActivity;
 import com.yx.personal.ganhuo.Adapter.AndroidAdapter;
 import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
@@ -25,6 +24,8 @@ import com.yx.personal.ganhuo.R;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+
+import okhttp3.Response;
 
 /**
  * Created by YX on 16/4/15.

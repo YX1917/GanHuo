@@ -71,6 +71,9 @@ public class PictureActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * 保存图片到本地
+     */
     private void saveImg() {
         FileBinaryResource resource = (FileBinaryResource) Fresco.getImagePipelineFactory().getMainDiskStorageCache().getResource(new SimpleCacheKey(url.toString()));
         File file = resource.getFile();

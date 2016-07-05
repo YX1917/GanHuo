@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.yx.personal.ganhuo.Activity.VideoInfoActivity">
 
+
     <include layout="@layout/toolbar" />
 
     <FrameLayout
@@ -146,5 +147,10 @@
 
         </LinearLayout>
     </FrameLayout>
+    <FrameLayout
+        android:id="@+id/full_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

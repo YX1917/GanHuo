@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.squareup.okhttp.Response;
 import com.yx.personal.ganhuo.Adapter.FuLiAdapter;
 import com.yx.personal.ganhuo.Bean.WelfareBean;
 import com.yx.personal.ganhuo.NetWork.ApiCall;
@@ -22,6 +21,8 @@ import com.yx.personal.ganhuo.R;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+
+import okhttp3.Response;
 
 /**
  * Created by YX on 16/4/12.

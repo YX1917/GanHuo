@@ -1,9 +1,9 @@
 package com.yx.personal.ganhuo.NetWork;
 
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
 
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 /**
  * http请求封装 Created by YX on 2015/12/21.

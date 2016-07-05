@@ -18,7 +18,9 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yx.personal.ganhuo.R;
 import com.yx.personal.ganhuo.Utils.AppManager;
 
-
+/**
+ * activity基类
+ */
 public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     private ActionBar actionBar;

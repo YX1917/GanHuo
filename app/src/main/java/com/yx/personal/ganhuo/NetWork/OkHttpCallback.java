@@ -3,13 +3,15 @@ package com.yx.personal.ganhuo.NetWork;
 import android.app.Activity;
 import android.util.Log;
 
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 /**
@@ -26,32 +28,33 @@ public abstract class OkHttpCallback implements Callback {
     }
 
     // [+] Callback of OkHttp
-    @Override
-    public void onFailure(final Request request, final IOException e) {
 
+    @Override
+    public void onFailure(final Call call, final IOException e) {
         mActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                handleApiFailure(request, e);
+                handleApiFailure(call.request(), e);
             }
         });
     }
 
+
     @Override
-    public void onResponse(final Response response) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-						handleApiSuccess(response);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+    public void onResponse(final Call call, final Response response) throws IOException {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    handleApiSuccess(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }).start();
-
-
+            }
+        }).start();
     }
+
+
     // [-] Callback of OkHttp
 
     protected void handlePreResponse(Response response) {}
