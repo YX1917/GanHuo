@@ -1,14 +1,20 @@
 package com.yx.personal.ganhuo.Media;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -33,7 +39,7 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
     private View rView;
     private Context mContext;
     private boolean portrait;
-//    private OrientationEventListener orientationEventListener;
+
 
     public VideoPlayView(Context context) {
         super(context);
@@ -42,6 +48,34 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
         initViews();
         initActions();
     }
+
+    public VideoPlayView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mContext = context;
+        initData();
+        initViews();
+        initActions();
+    }
+
+    public VideoPlayView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        mContext = context;
+        initData();
+        initViews();
+        initActions();
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public VideoPlayView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        mContext = context;
+        initData();
+        initViews();
+        initActions();
+    }
+
+    private OrientationEventListener orientationEventListener;
+
 
     private void initData() {
 
@@ -73,11 +107,14 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
             }
         });
 
+
     }
+
 
     private void initActions() {
 
-        /*orientationEventListener = new OrientationEventListener(mContext) {
+        //方向传感
+        orientationEventListener = new OrientationEventListener(mContext) {
             @Override
             public void onOrientationChanged(int orientation) {
                 Log.e("onOrientationChanged", "orientation");
@@ -94,7 +131,7 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
                     }
                 }
             }
-        };*/
+        };
     }
 
     public boolean isPlay() {
@@ -123,17 +160,17 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
         }
     }
 
-    public void start(){
-        if (mVideoView.isPlaying()){
+    public void start() {
+        if (mVideoView.isPlaying()) {
             mVideoView.start();
         }
     }
 
-    public void setContorllerVisiable(){
+    public void setContorllerVisiable() {
         mediaController.setVisiable();
     }
 
-    public void seekTo(int msec){
+    public void seekTo(int msec) {
         mVideoView.seekTo(msec);
     }
 
@@ -201,6 +238,10 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
         mediaController.setShowContoller(isShowContoller);
     }
 
+    public int getCurrentPosition() {
+        return mVideoView.getCurrentPosition();
+    }
+
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
 
@@ -232,4 +273,6 @@ public class VideoPlayView extends RelativeLayout implements MediaPlayer.OnInfoL
     public interface CompletionListener {
         void completion(IMediaPlayer mp);
     }
+
+
 }

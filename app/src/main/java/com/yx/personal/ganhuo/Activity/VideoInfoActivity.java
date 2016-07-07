@@ -34,6 +34,7 @@ public class VideoInfoActivity extends BaseActivity {
     private TextView mType4;
     private TextView mMessage;
     private TextView mTime;
+    private TextView[] textViews;
 
     private VideoPlayView videoItemView;
     private FrameLayout fullScreen;
@@ -69,6 +70,7 @@ public class VideoInfoActivity extends BaseActivity {
         mType2 = (TextView) findViewById(R.id.tv_videoInfo_type2);
         mType3 = (TextView) findViewById(R.id.tv_videoInfo_type3);
         mType4 = (TextView) findViewById(R.id.tv_videoInfo_type4);
+        textViews= new TextView[]{mType1, mType2, mType3, mType4};
         mTime = (TextView) findViewById(R.id.tv_videoInfo_time);
         mMessage = (TextView) findViewById(R.id.tv_videoInfo_message);
 
@@ -76,10 +78,16 @@ public class VideoInfoActivity extends BaseActivity {
         mBlurred.setImageURI(Uri.parse(mDataBean.getCover().getBlurred()));
         mTitle.setText(mDataBean.getTitle());
         mType.setText(mDataBean.getCategory());
-        mType1.setText(mDataBean.getTags().get(0).getName());
-        mType2.setText(mDataBean.getTags().get(1).getName());
-        mType3.setText(mDataBean.getTags().get(2).getName());
-        mType4.setText(mDataBean.getTags().get(3).getName());
+        for(int i=0;i<mDataBean.getTags().size();i++){
+            if(i<=3){
+                textViews[i].setText(mDataBean.getTags().get(i).getName());
+            }
+
+        }
+//        mType1.setText(mDataBean.getTags().get(0).getName());
+//        mType2.setText(mDataBean.getTags().get(1).getName());
+//        mType3.setText(mDataBean.getTags().get(2).getName());
+//        mType4.setText(mDataBean.getTags().get(3)==null?"":mDataBean.getTags().get(3).getName());
         mTime.setText(ToTimeString.toTimeString(mDataBean.getDuration()));
         mMessage.setText(mDataBean.getDescription());
 

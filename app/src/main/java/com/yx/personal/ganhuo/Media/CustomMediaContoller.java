@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
@@ -29,7 +30,7 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  */
 public class CustomMediaContoller implements IMediaController {
 
-
+    private GestureDetector mGestureDetector;
     private static final int SET_VIEW_HIDE = 1;
     private static final int TIME_OUT = 5000;
     private static final int MESSAGE_SHOW_PROGRESS = 2;
@@ -56,6 +57,8 @@ public class CustomMediaContoller implements IMediaController {
     private Context context;
     private ImageView pauseImage;
     private Bitmap bitmap;
+    private int seekTime;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -89,7 +92,7 @@ public class CustomMediaContoller implements IMediaController {
 
         isShowContoller=true;
         this.context=context;
-        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         initView();
         initAction();
     }
@@ -170,6 +173,7 @@ public class CustomMediaContoller implements IMediaController {
             public boolean onTouch(View v, MotionEvent event) {
                 Rect seekRect = new Rect();
                 seekBar.getHitRect(seekRect);
+                Log.e("TAG","what are you doing?");
 
                 if((event.getY() >= (seekRect.top-50)) && (event.getY()<= (seekRect.bottom+50))){
 
@@ -190,6 +194,7 @@ public class CustomMediaContoller implements IMediaController {
                 return false;
             }
         });
+
 
         videoView.setOnInfoListener(new IMediaPlayer.OnInfoListener() {
             @Override
@@ -260,6 +265,40 @@ public class CustomMediaContoller implements IMediaController {
             }
 
         });
+
+
+        mGestureDetector = new GestureDetector(context, new MyOnGestureListener());
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                    seekTime=videoView.getCurrentPosition();
+                }
+                mGestureDetector.onTouchEvent(event);
+                return true;
+            }
+
+
+        });
+    }
+
+
+    public class MyOnGestureListener extends GestureDetector.SimpleOnGestureListener{
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            Log.e("TAG","onScroll");
+            seekTime+=1000;
+
+            time.setText(  generateTime((long) (seekTime * seekBar.getProgress() * 1.0f / 100)));
+            return false;
+        }
+
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            Log.e("TAG","onSingleTapUp");
+            return false;
+        }
     }
 
     public void setShowContoller(boolean isShowContoller) {
