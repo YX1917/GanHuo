@@ -3,29 +3,27 @@ package com.yx.personal.ganhuo.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.yx.personal.ganhuo.Activity.WebActivity;
 import com.yx.personal.ganhuo.Adapter.AndroidAdapter;
 import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.NetWork.ApiCall;
 import com.yx.personal.ganhuo.NetWork.OkHttpCallback;
+import com.yx.personal.ganhuo.NetWork.RetrofitManger;
 import com.yx.personal.ganhuo.R;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 
-import okhttp3.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by YX on 16/4/15.
@@ -34,12 +32,10 @@ public class FragmentTwo extends Fragment {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private GridLayoutManager mGridLayoutManager;
-    private OkHttpCallback okHttpCallback;
     private AndroidAdapter androidAdapter;
     private AndroidInfoBean androidInfoBean;
     private int lastVisibleItem;
     private int page = 1;//初始请求页码
-    private static Handler myHandler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,33 +45,9 @@ public class FragmentTwo extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initHandler();
-        initOkHttpCall();
         initView(view);
     }
 
-
-    private void initHandler() {
-        myHandler = new Handler() {
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        mRecyclerView.setAdapter(androidAdapter);
-                        mSwipeRefreshWidget.setRefreshing(false);
-                        page++;
-                        Log.e("TAG", "1信息" + page);
-                        break;
-                    case 2:
-                        androidAdapter.notifyDataSetChanged();
-                        mSwipeRefreshWidget.setRefreshing(false);
-                        page++;
-                        Log.e("TAG", "2信息" + page);
-                        break;
-                }
-                super.handleMessage(msg);
-            }
-        };
-    }
 
     private void initView(View view) {
         androidInfoBean = new AndroidInfoBean();
@@ -92,7 +64,19 @@ public class FragmentTwo extends Fragment {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == androidAdapter.getItemCount()) {
                     mSwipeRefreshWidget.setRefreshing(true);
-                    ApiCall.RequestAndroid(page).enqueue(okHttpCallback);
+                    RetrofitManger.builder().getAndroidInfo(10,page)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Action1<AndroidInfoBean>() {
+                                @Override
+                                public void call(AndroidInfoBean androidInfoBean) {
+                                    FragmentTwo.this.androidInfoBean.getResults().addAll(androidInfoBean.getResults());
+                                    androidAdapter.notifyDataSetChanged();
+                                    mSwipeRefreshWidget.setRefreshing(false);
+                                    page++;
+                                    setOnclickListener(androidAdapter);
+                                }
+                            });
                 }
             }
 
@@ -114,47 +98,40 @@ public class FragmentTwo extends Fragment {
         mSwipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ApiCall.RequestAndroid(1).enqueue(okHttpCallback);
+//                ApiCall.RequestAndroid(1).enqueue(okHttpCallback);
+               RetrofitManger.builder().getAndroidInfo(10, 1)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<AndroidInfoBean>() {
+                            @Override
+                            public void call(AndroidInfoBean androidInfoBean) {
+                                FragmentTwo.this.androidInfoBean = androidInfoBean;
+                                androidAdapter = new AndroidAdapter(getActivity(), androidInfoBean.getResults());
+                                mRecyclerView.setAdapter(androidAdapter);
+                                mSwipeRefreshWidget.setRefreshing(false);
+                                page++;
+                                setOnclickListener(androidAdapter);
+                            }
+                        });
+
             }
+
         });
     }
 
-    private void initOkHttpCall() {
-        okHttpCallback = new OkHttpCallback(getActivity()) {
-            @Override
-            protected void handleApiSuccess(Response response) throws IOException {
-                Gson gson = new Gson();
-                AndroidInfoBean backBean = gson.fromJson(response.body().string(), AndroidInfoBean.class);
-                if (androidInfoBean.getResults() == null) {
-                    androidInfoBean = backBean;
-
-                    androidAdapter = new AndroidAdapter(getActivity(), androidInfoBean.getResults());
-                    myHandler.sendEmptyMessage(1);
-                    setOnclickListener(androidAdapter);
-                    Log.e("TAG", "welfareBean.getResults() == null"+backBean.toString());
-                } else {
-                    androidInfoBean.getResults().addAll(backBean.getResults());
-                    myHandler.sendEmptyMessage(2);
-                    setOnclickListener(androidAdapter);
-                    Log.e("TAG", "welfareBean.getResults() != null");
-                }
-
-            }
-        };
-    }
 
     private void setOnclickListener(AndroidAdapter androidAdapter) {
         androidAdapter.setOnItemClickLitener(new AndroidAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("URL",androidInfoBean.getResults().get(position).getUrl());
+                intent.putExtra("URL", androidInfoBean.getResults().get(position).getUrl());
                 getActivity().startActivity(intent);
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                Toast.makeText(getActivity(),"长按",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "长按", Toast.LENGTH_SHORT).show();
             }
         });
     }

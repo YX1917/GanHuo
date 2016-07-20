@@ -23,6 +23,11 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 import okhttp3.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 /**
  * Created by YX on 16/4/12.
@@ -38,6 +43,33 @@ public class FragmentOne extends Fragment {
     private int page = 1;//初始请求页码
 
     private static Handler myHandler;
+    Observer<String> observer = new Observer<String>() {
+        @Override
+        public void onNext(String s) {
+            Log.e("TAG", "Item: " + s);
+        }
+
+        @Override
+        public void onCompleted() {
+            Log.e("TAG", "Completed!");
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.e("TAG", "Error!");
+        }
+    };
+
+    Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+        @Override
+        public void call(Subscriber<? super String> subscriber) {
+            subscriber.onNext("Hello");
+            subscriber.onNext("Hi");
+            subscriber.onNext("Aloha");
+            subscriber.onCompleted();
+        }
+    });
+
 
 
     @Override
@@ -52,6 +84,8 @@ public class FragmentOne extends Fragment {
         initHandler();
         initOkHttpCall();
         initView(view);
+        observable.subscribe(observer);
+
 
 
     }
@@ -135,7 +169,28 @@ public class FragmentOne extends Fragment {
                 if (welfareBean.getResults() == null) {
                     welfareBean = backBean;
                     fuLiAdapter = new FuLiAdapter(getActivity(), welfareBean.getResults());
-                    myHandler.sendEmptyMessage(1);
+//                    myHandler.sendEmptyMessage(1);
+                    Observable.just("Hello")
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Observer<String>() {
+                                @Override
+                                public void onCompleted() {
+                                    Log.e("TAG", "完成");
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+
+                                }
+
+                                @Override
+                                public void onNext(String s) {
+                                    mRecyclerView.setAdapter(fuLiAdapter);
+                                    mSwipeRefreshWidget.setRefreshing(false);
+                                    page++;
+                                    Log.e("TAG", "1信息" + page);
+                                }
+                            });
                     Log.e("TAG", "welfareBean.getResults() == null");
                 } else {
                     welfareBean.getResults().addAll(backBean.getResults());

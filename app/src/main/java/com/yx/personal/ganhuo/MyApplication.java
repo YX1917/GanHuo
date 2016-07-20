@@ -22,7 +22,7 @@ public class MyApplication extends Application {
 
     }
 
-    private static Context getContext(){
+    public static Context getContext(){
         return mContext;
     }
 }
