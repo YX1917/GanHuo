@@ -2,7 +2,6 @@ package com.yx.personal.ganhuo.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,27 +14,23 @@ import android.widget.Toast;
 import com.yx.personal.ganhuo.Activity.WebActivity;
 import com.yx.personal.ganhuo.Adapter.AndroidAdapter;
 import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.NetWork.OkHttpCallback;
-import com.yx.personal.ganhuo.NetWork.RetrofitManger;
+import com.yx.personal.ganhuo.Pesenter.AndroidInfoPresenter;
 import com.yx.personal.ganhuo.R;
 
 import java.lang.reflect.Method;
 
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by YX on 16/4/15.
  */
-public class FragmentTwo extends Fragment {
+public class FragmentTwo extends Fragment implements FragmentTwoView{
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshWidget;
     private GridLayoutManager mGridLayoutManager;
     private AndroidAdapter androidAdapter;
-    private AndroidInfoBean androidInfoBean;
     private int lastVisibleItem;
-    private int page = 1;//初始请求页码
+
+
+    private AndroidInfoPresenter mAndroidInfoPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,11 +41,11 @@ public class FragmentTwo extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        mAndroidInfoPresenter = new AndroidInfoPresenter(this);
     }
 
 
     private void initView(View view) {
-        androidInfoBean = new AndroidInfoBean();
         mGridLayoutManager = new GridLayoutManager(getActivity(), 1);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle_android);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
@@ -63,20 +58,7 @@ public class FragmentTwo extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItem + 1 == androidAdapter.getItemCount()) {
-                    mSwipeRefreshWidget.setRefreshing(true);
-                    RetrofitManger.builder().getAndroidInfo(10,page)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Action1<AndroidInfoBean>() {
-                                @Override
-                                public void call(AndroidInfoBean androidInfoBean) {
-                                    FragmentTwo.this.androidInfoBean.getResults().addAll(androidInfoBean.getResults());
-                                    androidAdapter.notifyDataSetChanged();
-                                    mSwipeRefreshWidget.setRefreshing(false);
-                                    page++;
-                                    setOnclickListener(androidAdapter);
-                                }
-                            });
+                    mAndroidInfoPresenter.show(10, false);
                 }
             }
 
@@ -88,7 +70,6 @@ public class FragmentTwo extends Fragment {
         });
 
 
-
         mSwipeRefreshWidget = (SwipeRefreshLayout) view.findViewById(R.id.swipe_android_refresh);
         setRefreshing(mSwipeRefreshWidget, true, true);
 
@@ -98,22 +79,7 @@ public class FragmentTwo extends Fragment {
         mSwipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                ApiCall.RequestAndroid(1).enqueue(okHttpCallback);
-               RetrofitManger.builder().getAndroidInfo(10, 1)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<AndroidInfoBean>() {
-                            @Override
-                            public void call(AndroidInfoBean androidInfoBean) {
-                                FragmentTwo.this.androidInfoBean = androidInfoBean;
-                                androidAdapter = new AndroidAdapter(getActivity(), androidInfoBean.getResults());
-                                mRecyclerView.setAdapter(androidAdapter);
-                                mSwipeRefreshWidget.setRefreshing(false);
-                                page++;
-                                setOnclickListener(androidAdapter);
-                            }
-                        });
-
+                mAndroidInfoPresenter.show(10, true);
             }
 
         });
@@ -125,7 +91,6 @@ public class FragmentTwo extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), WebActivity.class);
-                intent.putExtra("URL", androidInfoBean.getResults().get(position).getUrl());
                 getActivity().startActivity(intent);
             }
 
@@ -155,6 +120,23 @@ public class FragmentTwo extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    @Override
+    public void setRefreshing(boolean isRefresh) {
+        mSwipeRefreshWidget.setRefreshing(isRefresh);
+    }
+
+    @Override
+    public void showData(AndroidInfoBean androidInfoBean) {
+        if (androidInfoBean.getResults().size() == 10) {
+            androidAdapter = new AndroidAdapter(getActivity(), androidInfoBean.getResults());
+            mRecyclerView.setAdapter(androidAdapter);
+        } else {
+            androidAdapter.notifyDataSetChanged();
+        }
+        setOnclickListener(androidAdapter);
     }
 
 }
