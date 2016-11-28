@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Utils;
+package com.yx.personal.ganhuo.utils;
 
 import android.os.Environment;
 

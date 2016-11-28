@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yx.personal.ganhuo.Media;
+package com.yx.personal.ganhuo.media;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;

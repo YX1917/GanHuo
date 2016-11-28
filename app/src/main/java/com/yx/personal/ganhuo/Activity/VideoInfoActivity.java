@@ -1,11 +1,8 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +11,11 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.yx.personal.ganhuo.Bean.DataBean;
-import com.yx.personal.ganhuo.Media.VideoPlayView;
+import com.yx.personal.ganhuo.bean.DataBean;
+import com.yx.personal.ganhuo.media.VideoPlayView;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.AppManager;
-import com.yx.personal.ganhuo.Utils.ToTimeString;
-
-import tv.danmaku.ijk.media.player.IMediaPlayer;
+import com.yx.personal.ganhuo.utils.AppManager;
+import com.yx.personal.ganhuo.utils.ToTimeString;
 
 public class VideoInfoActivity extends BaseActivity {
     private SimpleDraweeView mPlay;
@@ -42,6 +37,11 @@ public class VideoInfoActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_video_info;
+    }
+
+    @Override
+    protected void setToolbar() {
+
     }
 
     @Override

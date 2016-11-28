@@ -1,23 +1,35 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.Menu;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.MenuItem;
 
-import com.yx.personal.ganhuo.Fragment.FragmentOne;
-import com.yx.personal.ganhuo.Fragment.FragmentTwo;
-import com.yx.personal.ganhuo.Fragment.FragmentVideo;
+import com.yx.personal.ganhuo.cudtomView.BottomNavigationViewEx;
 import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.cudtomView.CustomViewPager;
+import com.yx.personal.ganhuo.fragment.MineFragment;
+import com.yx.personal.ganhuo.fragment.NewsFragment;
+import com.yx.personal.ganhuo.fragment.PictureFragment;
+import com.yx.personal.ganhuo.fragment.VideoFragment;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
-    private NavigationView  navigationView;
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends BaseActivity {
+    private List<Fragment> fragmentList = new ArrayList<>();
+    private FragmentPagerAdapter pagerAdapter;
+
+
+    @BindView(R.id.vp_fragment)
+    CustomViewPager vpFragment;
+    @BindView(R.id.bottom_nav)
+    BottomNavigationViewEx bottomNav;
 
     @Override
     protected int getContentView() {
@@ -25,78 +37,67 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void setToolbar() {
+        setTitle("I LOVE YOU");
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("I LOVE YOU");
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        navigationView.setCheckedItem(R.id.nav_camara);
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentTwo()).commit();
+        ButterKnife.bind(this);
+        initBottomNav();
+        initViewPager();
     }
 
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    private void initViewPager() {
+        if (fragmentList.isEmpty()) {
+            fragmentList.add(new NewsFragment());
+            fragmentList.add(new PictureFragment());
+            fragmentList.add(new VideoFragment());
+            fragmentList.add(new MineFragment());
         }
+        pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return fragmentList.get(position);
+            }
+
+            @Override
+            public int getCount() {
+                return fragmentList.size();
+            }
+        };
+        vpFragment.setAdapter(pagerAdapter);
+        vpFragment.setCurrentItem(0);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    private void initBottomNav() {
+        bottomNav.enableAnimation(true);
+        bottomNav.enableShiftingMode(false);
+        bottomNav.enableItemShiftingMode(false);
+        bottomNav.setTextVisibility(true);
+        bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bottom_news:
+                        vpFragment.setCurrentItem(0);
+                        break;
+                    case R.id.bottom_picture:
+                        vpFragment.setCurrentItem(1);
+                        break;
+                    case R.id.bottom_video:
+                        vpFragment.setCurrentItem(2);
+                        break;
+                    case R.id.bottom_mine:
+                        vpFragment.setCurrentItem(3);
+                        break;
+                }
+                return true;
+            }
+        });
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camara) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentTwo()).commit();
-        } else if (id == R.id.nav_gallery) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
-        } else if (id == R.id.nav_slideshow) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentVideo()).commit();
-        } else if (id == R.id.nav_manage) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
-        } else if (id == R.id.nav_share) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
-        } else if (id == R.id.nav_send) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new FragmentOne()).commit();
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

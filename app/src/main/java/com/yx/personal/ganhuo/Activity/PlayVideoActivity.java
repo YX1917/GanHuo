@@ -1,16 +1,13 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 
-import com.yx.personal.ganhuo.Media.VideoPlayView;
+import com.yx.personal.ganhuo.media.VideoPlayView;
 import com.yx.personal.ganhuo.R;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;

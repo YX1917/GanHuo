@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Utils;
+package com.yx.personal.ganhuo.utils;
 
 /**
  * Created by YX on 16/6/30.

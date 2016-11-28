@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Fragment;
+package com.yx.personal.ganhuo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +8,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.yx.personal.ganhuo.Activity.VideoInfoActivity;
-import com.yx.personal.ganhuo.Adapter.VideoAdapter;
-import com.yx.personal.ganhuo.Bean.DailyPicksBean;
-import com.yx.personal.ganhuo.NetWork.ApiCall;
-import com.yx.personal.ganhuo.NetWork.OkHttpCallback;
+import com.yx.personal.ganhuo.activity.VideoInfoActivity;
+import com.yx.personal.ganhuo.adapter.VideoAdapter;
+import com.yx.personal.ganhuo.bean.DailyPicksBean;
+import com.yx.personal.ganhuo.netWork.ApiCall;
+import com.yx.personal.ganhuo.netWork.OkHttpCallback;
 import com.yx.personal.ganhuo.R;
 
 import java.io.IOException;

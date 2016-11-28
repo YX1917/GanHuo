@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Media;
+package com.yx.personal.ganhuo.media;
 
 import android.app.Activity;
 import android.content.Context;

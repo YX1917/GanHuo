@@ -1,7 +1,7 @@
-package com.yx.personal.ganhuo.Model;
+package com.yx.personal.ganhuo.model;
 
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.NetWork.RetrofitManger;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.netWork.RetrofitManger;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

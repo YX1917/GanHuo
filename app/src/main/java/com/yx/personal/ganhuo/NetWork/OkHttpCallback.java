@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.NetWork;
+package com.yx.personal.ganhuo.netWork;
 
 import android.app.Activity;
 import android.util.Log;

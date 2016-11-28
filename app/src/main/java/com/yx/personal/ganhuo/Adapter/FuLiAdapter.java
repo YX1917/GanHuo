@@ -1,29 +1,17 @@
-package com.yx.personal.ganhuo.Adapter;
+package com.yx.personal.ganhuo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Animatable;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.common.logging.FLog;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.controller.BaseControllerListener;
-import com.facebook.drawee.controller.ControllerListener;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.image.ImageInfo;
-import com.facebook.imagepipeline.image.QualityInfo;
-import com.yx.personal.ganhuo.Activity.PictureActivity;
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.Bean.WelfareBean;
+import com.yx.personal.ganhuo.activity.PictureActivity;
+import com.yx.personal.ganhuo.bean.WelfareBean;
 import com.yx.personal.ganhuo.R;
 
 import java.util.List;

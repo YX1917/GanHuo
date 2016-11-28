@@ -91,5 +91,9 @@
     <string name="can_not_play">can not play this video</string>
 
     <string name="not_support">player not support this device</string>
+    <string name="menu_video">视频</string>
+    <string name="menu_picture">福利</string>
+    <string name="menu_news">知识</string>
+    <string name="menu_mine">我的</string>
 
 </resources>

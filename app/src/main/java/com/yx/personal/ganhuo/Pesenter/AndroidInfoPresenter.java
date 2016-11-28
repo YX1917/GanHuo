@@ -1,8 +1,8 @@
-package com.yx.personal.ganhuo.Pesenter;
+package com.yx.personal.ganhuo.pesenter;
 
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.Fragment.FragmentTwoView;
-import com.yx.personal.ganhuo.Model.AndroidInfoModelImpl;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.fragment.FragmentTwoView;
+import com.yx.personal.ganhuo.model.AndroidInfoModelImpl;
 
 /**
  * Created by YX on 16/7/20.

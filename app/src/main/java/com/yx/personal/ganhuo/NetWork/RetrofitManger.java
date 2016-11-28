@@ -1,6 +1,6 @@
-package com.yx.personal.ganhuo.NetWork;
+package com.yx.personal.ganhuo.netWork;
 
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
 
 import java.util.concurrent.TimeUnit;
 

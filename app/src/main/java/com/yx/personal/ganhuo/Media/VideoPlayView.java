@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Media;
+package com.yx.personal.ganhuo.media;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,9 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;

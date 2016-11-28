@@ -1,6 +1,6 @@
-package com.yx.personal.ganhuo.Fragment;
+package com.yx.personal.ganhuo.fragment;
 
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
 
 /**
  * Created by YX on 16/7/21.

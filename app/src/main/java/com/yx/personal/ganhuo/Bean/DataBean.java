@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Bean;
+package com.yx.personal.ganhuo.bean;
 
 import java.io.Serializable;
 import java.util.List;

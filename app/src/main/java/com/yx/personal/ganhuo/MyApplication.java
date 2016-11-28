@@ -2,6 +2,7 @@ package com.yx.personal.ganhuo;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -25,4 +26,8 @@ public class MyApplication extends Application {
     public static Context getContext(){
         return mContext;
     }
+    public static void log(Context context,String s){
+        Log.e(context.getClass().getSimpleName(),s);
+    }
+
 }

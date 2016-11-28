@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Adapter;
+package com.yx.personal.ganhuo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
 import com.yx.personal.ganhuo.R;
 
 import java.util.List;

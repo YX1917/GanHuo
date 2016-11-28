@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Utils;
+package com.yx.personal.ganhuo.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

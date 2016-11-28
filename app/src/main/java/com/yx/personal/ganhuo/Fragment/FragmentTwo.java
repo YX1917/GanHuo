@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Fragment;
+package com.yx.personal.ganhuo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.yx.personal.ganhuo.Activity.WebActivity;
-import com.yx.personal.ganhuo.Adapter.AndroidAdapter;
-import com.yx.personal.ganhuo.Bean.AndroidInfoBean;
-import com.yx.personal.ganhuo.Pesenter.AndroidInfoPresenter;
+import com.yx.personal.ganhuo.activity.WebActivity;
+import com.yx.personal.ganhuo.adapter.AndroidAdapter;
+import com.yx.personal.ganhuo.bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.pesenter.AndroidInfoPresenter;
 import com.yx.personal.ganhuo.R;
 
 import java.lang.reflect.Method;

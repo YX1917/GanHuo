@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Fragment;
+package com.yx.personal.ganhuo.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.yx.personal.ganhuo.Adapter.FuLiAdapter;
-import com.yx.personal.ganhuo.Bean.WelfareBean;
-import com.yx.personal.ganhuo.NetWork.ApiCall;
-import com.yx.personal.ganhuo.NetWork.OkHttpCallback;
+import com.yx.personal.ganhuo.adapter.FuLiAdapter;
+import com.yx.personal.ganhuo.bean.WelfareBean;
+import com.yx.personal.ganhuo.netWork.ApiCall;
+import com.yx.personal.ganhuo.netWork.OkHttpCallback;
 import com.yx.personal.ganhuo.R;
 
 import java.io.IOException;
@@ -27,7 +27,6 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * Created by YX on 16/4/12.

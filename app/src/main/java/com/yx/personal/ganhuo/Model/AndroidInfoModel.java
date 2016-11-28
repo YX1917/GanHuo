@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Model;
+package com.yx.personal.ganhuo.model;
 
 /**
  * Created by YX on 16/7/20.

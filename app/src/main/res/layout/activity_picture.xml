@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-    tools:context="com.yx.personal.ganhuo.Activity.PictureActivity"
+    tools:context="com.yx.personal.ganhuo.activity.PictureActivity"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />

@@ -7,7 +7,7 @@
     android:background="@android:color/black"
     >
 
-    <com.yx.personal.ganhuo.Media.IjkVideoView
+    <com.yx.personal.ganhuo.media.IjkVideoView
         android:id="@+id/main_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

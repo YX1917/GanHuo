@@ -1,7 +1,6 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,14 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.AppManager;
+import com.yx.personal.ganhuo.utils.AppManager;
 
 /**
  * activity基类
@@ -43,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @return
      */
     protected abstract int getContentView();
+    protected abstract void setToolbar();
 
     /**
      * 初始化toolbar
@@ -66,6 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setNavigationBarTintEnabled(true);
         tintManager.setStatusBarTintResource(R.color.colorPrimaryDark);
+        setToolbar();
     }
 
     protected void setIsShowBack(boolean isShow) {
@@ -139,4 +138,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

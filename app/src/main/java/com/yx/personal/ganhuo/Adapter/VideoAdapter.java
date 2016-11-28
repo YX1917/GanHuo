@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Adapter;
+package com.yx.personal.ganhuo.adapter;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.yx.personal.ganhuo.Bean.DailyPicksBean;
+import com.yx.personal.ganhuo.bean.DailyPicksBean;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.ToTimeString;
+import com.yx.personal.ganhuo.utils.ToTimeString;
 
 /**
  * Created by YX on 16/6/29.

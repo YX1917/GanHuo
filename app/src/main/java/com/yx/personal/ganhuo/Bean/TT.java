@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Bean;
+package com.yx.personal.ganhuo.bean;
 
 /**
  * Created by YX on 16/6/29.

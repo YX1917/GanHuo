@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.NetWork;
+package com.yx.personal.ganhuo.netWork;
 
 
 import okhttp3.Call;

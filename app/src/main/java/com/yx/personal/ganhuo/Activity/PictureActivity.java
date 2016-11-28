@@ -1,10 +1,7 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
 import android.net.Uri;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,13 +12,10 @@ import com.facebook.cache.common.SimpleCacheKey;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.AppManager;
-import com.yx.personal.ganhuo.Utils.PictUtil;
+import com.yx.personal.ganhuo.utils.AppManager;
+import com.yx.personal.ganhuo.utils.PictUtil;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class PictureActivity extends BaseActivity {
     private SimpleDraweeView simpleDraweeView;
@@ -30,6 +24,11 @@ public class PictureActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_picture;
+    }
+
+    @Override
+    protected void setToolbar() {
+
     }
 
     @Override

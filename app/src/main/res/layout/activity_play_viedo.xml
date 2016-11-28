@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.PlayVideoActivity">
+    tools:context=".activity.PlayVideoActivity">
 
-    <com.yx.personal.ganhuo.Media.VideoPlayView
+    <com.yx.personal.ganhuo.media.VideoPlayView
         android:id="@+id/player_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.yx.personal.ganhuo.Media.VideoPlayView>
+    </com.yx.personal.ganhuo.media.VideoPlayView>
 
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.yx.personal.ganhuo.Activity;
+package com.yx.personal.ganhuo.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.Utils.AppManager;
+import com.yx.personal.ganhuo.utils.AppManager;
 
 public class WebActivity extends BaseActivity {
     private WebView webview;
@@ -17,6 +17,11 @@ public class WebActivity extends BaseActivity {
     @Override
     protected int getContentView() {
         return R.layout.activity_web;
+    }
+
+    @Override
+    protected void setToolbar() {
+
     }
 
     @Override
