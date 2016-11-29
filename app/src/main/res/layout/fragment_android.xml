@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Android"/>
-
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_android_refresh"
@@ -20,4 +15,11 @@
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</LinearLayout>
+    <com.yx.personal.ganhuo.cudtomView.ExceptionView
+        android:id="@+id/epv_android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:exp_msg="似乎出现点问题"
+        app:exp_icon="@mipmap/ic_launcher"
+        app:exp_action_btn_shown="true"/>
+</FrameLayout>

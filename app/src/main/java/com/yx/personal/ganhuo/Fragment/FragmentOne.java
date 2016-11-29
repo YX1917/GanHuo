@@ -12,28 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
+import com.yx.personal.ganhuo.R;
 import com.yx.personal.ganhuo.adapter.FuLiAdapter;
-import com.yx.personal.ganhuo.bean.WelfareBean;
 import com.yx.personal.ganhuo.netWork.ApiCall;
 import com.yx.personal.ganhuo.netWork.OkHttpCallback;
-import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.presenter.AndroidInfoPresenterImpl;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 
-import okhttp3.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by YX on 16/4/12.
  */
-public class FragmentOne extends Fragment {
+public class FragmentOne extends Fragment{
     private RecyclerView mRecyclerView;
-    private WelfareBean welfareBean = new WelfareBean();
     private OkHttpCallback okHttpCallback;
     private FuLiAdapter  fuLiAdapter;
     private SwipeRefreshLayout mSwipeRefreshWidget;
@@ -70,18 +65,20 @@ public class FragmentOne extends Fragment {
     });
 
 
+    private AndroidInfoPresenterImpl mAndroidInfoPresenter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_fuli, container, false);
+       View view =  inflater.inflate(R.layout.fragment_fuli, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initHandler();
-        initOkHttpCall();
         initView(view);
         observable.subscribe(observer);
 
@@ -118,7 +115,6 @@ public class FragmentOne extends Fragment {
      * @param view
      */
     private void initView(View view) {
-        welfareBean = new WelfareBean();
         mGridLayoutManager = new GridLayoutManager(getActivity(), 1);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycle_fuLi);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
@@ -152,54 +148,12 @@ public class FragmentOne extends Fragment {
         mSwipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ApiCall.RequestWelfare(1).enqueue(okHttpCallback);
             }
         });
 
     }
 
 
-    private void initOkHttpCall() {
-        okHttpCallback = new OkHttpCallback(getActivity()) {
-            @Override
-            protected void handleApiSuccess(Response response) throws IOException {
-                Gson gson = new Gson();
-                WelfareBean backBean = gson.fromJson(response.body().string(), WelfareBean.class);
-                if (welfareBean.getResults() == null) {
-                    welfareBean = backBean;
-                    fuLiAdapter = new FuLiAdapter(getActivity(), welfareBean.getResults());
-//                    myHandler.sendEmptyMessage(1);
-                    Observable.just("Hello")
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<String>() {
-                                @Override
-                                public void onCompleted() {
-                                    Log.e("TAG", "完成");
-                                }
-
-                                @Override
-                                public void onError(Throwable e) {
-
-                                }
-
-                                @Override
-                                public void onNext(String s) {
-                                    mRecyclerView.setAdapter(fuLiAdapter);
-                                    mSwipeRefreshWidget.setRefreshing(false);
-                                    page++;
-                                    Log.e("TAG", "1信息" + page);
-                                }
-                            });
-                    Log.e("TAG", "welfareBean.getResults() == null");
-                } else {
-                    welfareBean.getResults().addAll(backBean.getResults());
-                    myHandler.sendEmptyMessage(2);
-                    Log.e("TAG", "welfareBean.getResults() != null");
-                }
-
-            }
-        };
-    }
 
     /**
      * 利用反射使SwipeRefreshLayout进入界面就处于刷新状态
@@ -221,6 +175,5 @@ public class FragmentOne extends Fragment {
             }
         }
     }
-
 
 }

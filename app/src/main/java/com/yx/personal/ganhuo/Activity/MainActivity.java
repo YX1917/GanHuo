@@ -5,10 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
-import com.yx.personal.ganhuo.cudtomView.BottomNavigationViewEx;
 import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.cudtomView.BottomNavigationViewEx;
 import com.yx.personal.ganhuo.cudtomView.CustomViewPager;
 import com.yx.personal.ganhuo.fragment.MineFragment;
 import com.yx.personal.ganhuo.fragment.NewsFragment;
@@ -22,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
+    private final String TAG = getClass().getSimpleName();
     private List<Fragment> fragmentList = new ArrayList<>();
     private FragmentPagerAdapter pagerAdapter;
 
@@ -47,6 +50,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initBottomNav();
         initViewPager();
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
     }
 
     private void initViewPager() {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_marginTop="180dp"
+        android:id="@+id/iv_exception_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_exception_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_exception_icon"
+        android:layout_centerHorizontal="true"
+        android:text="空空如也~"
+        android:textSize="@dimen/text_size_s"/>
+
+    <Button
+        android:id="@+id/btn_exception_action"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_exception_msg"
+        android:layout_centerHorizontal="true"
+        android:text="点击重试"/>
+
+</RelativeLayout>
