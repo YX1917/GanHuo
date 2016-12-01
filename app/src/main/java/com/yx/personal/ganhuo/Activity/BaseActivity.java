@@ -1,17 +1,14 @@
 package com.yx.personal.ganhuo.activity;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yx.personal.ganhuo.R;
 import com.yx.personal.ganhuo.utils.AppManager;
 
@@ -60,10 +57,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         //设置状态栏颜色
         //see {https://github.com/jgilfelt/SystemBarTint}
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setNavigationBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.color.colorPrimaryDark);
+//        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//        tintManager.setStatusBarTintEnabled(true);
+//        tintManager.setNavigationBarTintEnabled(true);
+//        tintManager.setStatusBarTintResource(R.color.colorPrimaryDark);
         setToolbar();
     }
 

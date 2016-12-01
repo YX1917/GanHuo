@@ -5,6 +5,6 @@ package com.yx.personal.ganhuo;
  */
 
 public interface GetDataListener {
-    void success(Object o);
+    void success(Object object);
     void failed(Throwable throwable);
 }

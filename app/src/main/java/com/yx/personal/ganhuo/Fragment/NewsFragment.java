@@ -55,7 +55,7 @@ public class NewsFragment extends Fragment {
             tabNamesList.add("Android");
             tabNamesList.add("iOS");
         }
-        tabSwitch.setTabMode(TabLayout.MODE_FIXED);
+        tabSwitch.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabSwitch.addTab(tabSwitch.newTab().setText("Android"));
         tabSwitch.addTab(tabSwitch.newTab().setText("iOS"));
         tabSwitch.setupWithViewPager(vpNewsFragment);
@@ -79,5 +79,8 @@ public class NewsFragment extends Fragment {
 
     }
 
+    public void test(){
+
+    }
 
 }
