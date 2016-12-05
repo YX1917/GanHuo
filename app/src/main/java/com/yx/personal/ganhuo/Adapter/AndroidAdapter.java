@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.bean.DataInfoBean;
 
 import java.util.List;
 
@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
 public class AndroidAdapter extends RecyclerView.Adapter<AndroidAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<AndroidInfoBean.ResultsBean> androidBeanList;
+    private List<DataInfoBean.ResultsBean> androidBeanList;
 
 
-    public AndroidAdapter(Context mContext, List<AndroidInfoBean.ResultsBean> androidBeanList) {
+    public AndroidAdapter(Context mContext, List<DataInfoBean.ResultsBean> androidBeanList) {
         this.mContext = mContext;
         this.androidBeanList = androidBeanList;
     }
@@ -93,7 +93,7 @@ public class AndroidAdapter extends RecyclerView.Adapter<AndroidAdapter.MyViewHo
 
     private OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener) {
+    public void setOnItemClickListener(DataInfoBean dataInfoBean, OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 

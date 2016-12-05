@@ -1,7 +1,7 @@
 package com.yx.personal.ganhuo.model;
 
 import com.yx.personal.ganhuo.GetDataListener;
-import com.yx.personal.ganhuo.bean.AndroidInfoBean;
+import com.yx.personal.ganhuo.bean.DataInfoBean;
 import com.yx.personal.ganhuo.contract.AndroidInfoContract;
 import com.yx.personal.ganhuo.netWork.RetrofitManger;
 
@@ -14,24 +14,37 @@ import rx.schedulers.Schedulers;
  */
 
 public class AndroidInfoModelImpl implements AndroidInfoContract.Model {
-    private AndroidInfoBean mAndroidInfoBean;
+    private DataInfoBean mDataInfoBean;
 
 
     @Override
-    public void getAndroidInfo(int page, final GetDataListener getDataListener) {
+    public void getAndroidInfo(final int page, final GetDataListener getDataListener) {
         //网络请求
-        RetrofitManger.builder()
-                .getAndroidInfo(10, page).subscribeOn(Schedulers.io())
+        RetrofitManger.getInstance()
+                .getAndroidInfo(10, page)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<AndroidInfoBean>() {
+                .subscribe(new Action1<DataInfoBean>() {
                     @Override
-                    public void call(AndroidInfoBean androidInfoBean) {
-                        if (mAndroidInfoBean == null) {
-                            mAndroidInfoBean = androidInfoBean;
+                    public void call(DataInfoBean dataInfoBean) {
+                        if (mDataInfoBean == null) {
+                            mDataInfoBean = dataInfoBean;
                         } else {
-                            mAndroidInfoBean.getResults().addAll(androidInfoBean.getResults());
+                            if (page==1){
+                                if (mDataInfoBean.getResults().subList(0,9).containsAll(dataInfoBean.getResults())){
+                                    for (int i = dataInfoBean.getResults().size(); i<0; i--){
+                                        if (!mDataInfoBean.getResults().contains(dataInfoBean.getResults().get(i))){
+                                            mDataInfoBean.getResults().add(0, dataInfoBean.getResults().get(i));
+                                        }
+                                    }
+
+                                }
+                            }else {
+                                mDataInfoBean.getResults().addAll(dataInfoBean.getResults());
+                            }
+
                         }
-                        getDataListener.success(mAndroidInfoBean);
+                        getDataListener.success(mDataInfoBean);
                     }
                 }, new Action1<Throwable>() {
                     @Override

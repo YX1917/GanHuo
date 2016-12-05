@@ -21,22 +21,18 @@ public class WebActivity extends BaseActivity {
 
     @Override
     protected void setToolbar() {
-
+        setTitle("详情页");
+        setIsShowBack(true);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initView();
-        initToolbar();
         AppManager.getAppManager().addActivity(this);
     }
 
-    private void initToolbar() {
-        setTitle("详情页");
-        setIsShowBack(true);
-    }
+
 
     private void initView() {
         webview = (WebView) findViewById(R.id.webView_webActivity);

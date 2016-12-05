@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.yx.personal.ganhuo.R;
@@ -42,6 +40,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void setToolbar() {
         setTitle("I LOVE YOU");
+        hideToolBar();
+
     }
 
     @Override
@@ -50,7 +50,6 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         initBottomNav();
         initViewPager();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
     }
 
     private void initViewPager() {
@@ -86,15 +85,19 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.bottom_news:
+                        hideToolBar();
                         vpFragment.setCurrentItem(0);
                         break;
                     case R.id.bottom_picture:
+                        showToolBar();
                         vpFragment.setCurrentItem(1);
                         break;
                     case R.id.bottom_video:
+                        showToolBar();
                         vpFragment.setCurrentItem(2);
                         break;
                     case R.id.bottom_mine:
+                        showToolBar();
                         vpFragment.setCurrentItem(3);
                         break;
                 }
@@ -103,5 +106,6 @@ public class MainActivity extends BaseActivity {
         });
 
     }
+
 
 }

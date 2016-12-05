@@ -4,15 +4,15 @@ import com.yx.personal.ganhuo.GetDataListener;
 import com.yx.personal.ganhuo.bean.DataInfoBean;
 
 /**
- * Created by YX on 2016/11/29.
+ * Created by YX on 2016/12/5.
  */
 
-public class AndroidInfoContract {
+public interface PictureInfoContract {
+    
 public interface View{
     void setRefresh(boolean isRefresh);
     void showData(DataInfoBean dataInfoBean);
     void showExceptionView(boolean isShow);
-
 }
 
 public interface Presenter{
@@ -20,7 +20,7 @@ public interface Presenter{
 }
 
 public interface Model{
-    void getAndroidInfo(int page,GetDataListener getDataListener);
+    void getPictureInfo(int page,GetDataListener getDataListener);
 }
 
 

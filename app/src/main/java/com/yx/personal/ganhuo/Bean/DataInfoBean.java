@@ -1,11 +1,12 @@
 package com.yx.personal.ganhuo.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by YX on 16/5/24.
  */
-public class AndroidInfoBean {
+public class DataInfoBean implements Serializable {
 
     /**
      * error : false
@@ -145,7 +146,7 @@ public class AndroidInfoBean {
 
     @Override
     public String toString() {
-        return "AndroidInfoBean{" +
+        return "DataInfoBean{" +
                 "error=" + error +
                 ", results=" + results +
                 '}';

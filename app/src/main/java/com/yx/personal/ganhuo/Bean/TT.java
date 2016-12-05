@@ -5,6 +5,7 @@ package com.yx.personal.ganhuo.bean;
  */
 public class TT {
 
+
     /**
      * dataType : Banner
      * title :

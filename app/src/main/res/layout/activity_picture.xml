@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,22 +8,34 @@
     tools:context="com.yx.personal.ganhuo.activity.PictureActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/draweeview_picture_show"
+        <include layout="@layout/toolbar" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        fresco:viewAspectRatio="0.75"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        fresco:placeholderImageScaleType="centerCrop"
-        fresco:progressBarImage="@drawable/icon_loading"
-        fresco:progressBarImageScaleType="fitCenter"
-        fresco:progressBarAutoRotateInterval="1000"
-        fresco:failureImage="@drawable/icon_failure"
-        fresco:failureImageScaleType="centerCrop"
-        android:background="@color/colorGray"
-        />
+        android:layout_height="match_parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/draweeview_picture_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            fresco:viewAspectRatio="0.75"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:progressBarImage="@drawable/icon_loading"
+            fresco:progressBarImageScaleType="fitCenter"
+            fresco:progressBarAutoRotateInterval="1000"
+            fresco:failureImage="@drawable/icon_failure"
+            fresco:failureImageScaleType="centerCrop"
+            android:background="@color/colorGray"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+
+
+
+
 
 
 </LinearLayout>

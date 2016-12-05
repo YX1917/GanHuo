@@ -6,7 +6,9 @@
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    >
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_behavior="@string/bye_burger_title_behavior"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/toolbar_title"

@@ -96,6 +96,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 隐藏toolbar
+     */
+    public void showToolBar() {
+        if(toolbar!=null){
+            toolbar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
      * 加载对话框
      */
     private MaterialDialog mProgressDialog;

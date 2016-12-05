@@ -17,9 +17,14 @@ import com.yx.personal.ganhuo.utils.PictUtil;
 
 import java.io.File;
 
+import butterknife.BindView;
+
 public class PictureActivity extends BaseActivity {
-    private SimpleDraweeView simpleDraweeView;
     private String url;
+
+    @BindView(R.id.draweeview_picture_show)
+    SimpleDraweeView draweeviewPictureShow;
+
 
     @Override
     protected int getContentView() {
@@ -28,7 +33,8 @@ public class PictureActivity extends BaseActivity {
 
     @Override
     protected void setToolbar() {
-
+        setTitle("Balala");
+        setIsShowBack(true);
     }
 
     @Override
@@ -41,14 +47,14 @@ public class PictureActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Balala");
-        setIsShowBack(true);
-        simpleDraweeView = (SimpleDraweeView) findViewById(R.id.draweeview_picture_show);
-        url = getIntent().getStringExtra("url");
-        simpleDraweeView.setImageURI(Uri.parse(url));
+        initView();
         AppManager.getAppManager().addActivity(this);
+    }
 
-
+    private void initView() {
+        draweeviewPictureShow = (SimpleDraweeView) findViewById(R.id.draweeview_picture_show);
+        url = getIntent().getStringExtra("url");
+        draweeviewPictureShow.setImageURI(Uri.parse(url));
     }
 
     @Override
@@ -76,10 +82,10 @@ public class PictureActivity extends BaseActivity {
     private void saveImg() {
         FileBinaryResource resource = (FileBinaryResource) Fresco.getImagePipelineFactory().getMainDiskStorageCache().getResource(new SimpleCacheKey(url.toString()));
         File file = resource.getFile();
-        if(PictUtil.saveFile(file)){
-            Toast.makeText(PictureActivity.this,"图片已保存",Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(PictureActivity.this,"图片保存失败，请重试",Toast.LENGTH_SHORT).show();
+        if (PictUtil.saveFile(file)) {
+            Toast.makeText(PictureActivity.this, "图片已保存", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(PictureActivity.this, "图片保存失败，请重试", Toast.LENGTH_SHORT).show();
         }
     }
 }
