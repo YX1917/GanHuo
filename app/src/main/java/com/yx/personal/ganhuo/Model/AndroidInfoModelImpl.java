@@ -20,7 +20,7 @@ public class AndroidInfoModelImpl implements AndroidInfoContract.Model {
     @Override
     public void getAndroidInfo(final int page, final GetDataListener getDataListener) {
         //网络请求
-        RetrofitManger.getInstance()
+        RetrofitManger.getInstance("http://gank.io/api/")
                 .getAndroidInfo(10, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -3,6 +3,7 @@ package com.yx.personal.ganhuo.netWork;
 import android.os.Environment;
 import android.util.Log;
 
+import com.yx.personal.ganhuo.bean.DailyPicksBean;
 import com.yx.personal.ganhuo.bean.DataInfoBean;
 import com.yx.personal.ganhuo.utils.NetUtil;
 
@@ -42,17 +43,17 @@ public class RetrofitManger {
     //长缓存有效期为7天
     public static final int CACHE_STALE_LONG = 120;
 
-    public  static RetrofitManger getInstance(){
-        if(mRetrofitManger==null){
-            mRetrofitManger = new RetrofitManger();
-        }
+    public  static RetrofitManger getInstance(String baseUrl){
+//        if(mRetrofitManger==null){
+            mRetrofitManger = new RetrofitManger(baseUrl);
+//        }
         return mRetrofitManger;
     }
 
-    public RetrofitManger() {
+    public RetrofitManger(String baseUrl) {
         initOkHttpClient();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://gank.io/api/")
+                .baseUrl(baseUrl)
                 .client(mOkHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//Rxjava
                 .addConverterFactory(GsonConverterFactory.create())//gson解析
@@ -92,6 +93,10 @@ public class RetrofitManger {
 
     public Observable<DataInfoBean> getPictureInfo(int num, int page){
         return mApiCallBiz.getPictureInfo(num,page);
+    }
+
+    public Observable<DailyPicksBean> getVideoInfo(){
+        return mApiCallBiz.getVideoInfo();
     }
 
     // 云端响应头拦截器，用来配置缓存策略

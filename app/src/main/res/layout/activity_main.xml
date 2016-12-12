@@ -17,14 +17,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.yx.personal.ganhuo.cudtomView.BottomNavigationViewEx
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        android:background="#eeeeee"
-        app:layout_behavior="@string/bye_burger_bottom_behavior"
-        app:menu="@menu/main_bottom"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -39,6 +31,17 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </FrameLayout>
+
+    <com.yx.personal.ganhuo.cudtomView.BottomNavigationViewEx
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="#eeeeee"
+        app:layout_behavior="@string/bye_burger_bottom_behavior"
+        app:menu="@menu/main_bottom"/>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
 

@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity {
         };
         vpFragment.setAdapter(pagerAdapter);
         vpFragment.setCurrentItem(0);
+        vpFragment.setOffscreenPageLimit(4);
 
     }
 
