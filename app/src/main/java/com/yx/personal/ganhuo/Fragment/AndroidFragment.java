@@ -3,10 +3,10 @@ package com.yx.personal.ganhuo.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +62,7 @@ public class AndroidFragment extends BaseFragment implements AndroidInfoContract
 
         layoutManager = new LinearLayoutManager(getActivity());
         recycleAndroid.setLayoutManager(layoutManager);
+        swipeAndroidRefresh.setColorSchemeColors(ContextCompat.getColor(getActivity(),R.color.colorPrimary));
         swipeAndroidRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

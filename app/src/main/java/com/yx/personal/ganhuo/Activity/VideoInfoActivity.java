@@ -6,33 +6,48 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.yx.personal.ganhuo.bean.DataBean;
-import com.yx.personal.ganhuo.media.VideoPlayView;
 import com.yx.personal.ganhuo.R;
+import com.yx.personal.ganhuo.bean.DataBean;
 import com.yx.personal.ganhuo.utils.AppManager;
 import com.yx.personal.ganhuo.utils.ToTimeString;
 
-public class VideoInfoActivity extends BaseActivity {
-    private SimpleDraweeView mPlay;
-    private SimpleDraweeView mBlurred;
-    private DataBean mDataBean;
-    private TextView mTitle;
-    private TextView mType;
-    private TextView mType1;
-    private TextView mType2;
-    private TextView mType3;
-    private TextView mType4;
-    private TextView mMessage;
-    private TextView mTime;
-    private TextView[] textViews;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private VideoPlayView videoItemView;
-    private FrameLayout fullScreen;
+//import com.yx.personal.ganhuo.media.VideoPlayView;
+
+public class VideoInfoActivity extends BaseActivity {
+
+    @BindView(R.id.drawee_videoInfo_play)
+    SimpleDraweeView draweeVideoInfoPlay;
+    @BindView(R.id.drawee_videoInfo_blurred)
+    SimpleDraweeView draweeVideoInfoBlurred;
+    @BindView(R.id.tv_videoInfo_title)
+    TextView tvVideoInfoTitle;
+    @BindView(R.id.tv_videoInfo_type)
+    TextView tvVideoInfoType;
+    @BindView(R.id.tv_videoInfo_time)
+    TextView tvVideoInfoTime;
+    @BindView(R.id.tv_videoInfo_type1)
+    TextView tvVideoInfoType1;
+    @BindView(R.id.tv_videoInfo_type2)
+    TextView tvVideoInfoType2;
+    @BindView(R.id.tv_videoInfo_type3)
+    TextView tvVideoInfoType3;
+    @BindView(R.id.tv_videoInfo_type4)
+    TextView tvVideoInfoType4;
+    @BindView(R.id.tv_videoInfo_message)
+    TextView tvVideoInfoMessage;
+    @BindView(R.id.full_screen)
+    FrameLayout fullScreen;
+
+    private DataBean mDataBean;
+//    private VideoPlayView videoItemView;
+    private TextView[] textViews;
 
     @Override
     protected int getContentView() {
@@ -41,14 +56,15 @@ public class VideoInfoActivity extends BaseActivity {
 
     @Override
     protected void setToolbar() {
-
+        setTitle("精选视频");
+        setIsShowBack(true);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
-        initToolBar();
+        ButterKnife.bind(this);
         getVideoInfo();
         initView();
 
@@ -62,24 +78,25 @@ public class VideoInfoActivity extends BaseActivity {
      * 初始化控件
      */
     private void initView() {
-        mPlay = (SimpleDraweeView) findViewById(R.id.drawee_videoInfo_play);
-        mBlurred = (SimpleDraweeView) findViewById(R.id.drawee_videoInfo_blurred);
-        mTitle = (TextView) findViewById(R.id.tv_videoInfo_title);
-        mType = (TextView) findViewById(R.id.tv_videoInfo_type);
-        mType1 = (TextView) findViewById(R.id.tv_videoInfo_type1);
-        mType2 = (TextView) findViewById(R.id.tv_videoInfo_type2);
-        mType3 = (TextView) findViewById(R.id.tv_videoInfo_type3);
-        mType4 = (TextView) findViewById(R.id.tv_videoInfo_type4);
-        textViews= new TextView[]{mType1, mType2, mType3, mType4};
-        mTime = (TextView) findViewById(R.id.tv_videoInfo_time);
-        mMessage = (TextView) findViewById(R.id.tv_videoInfo_message);
+//        mPlay = (SimpleDraweeView) findViewById(R.id.drawee_videoInfo_play);
+//        mBlurred = (SimpleDraweeView) findViewById(R.id.drawee_videoInfo_blurred);
+//        mTitle = (TextView) findViewById(R.id.tv_videoInfo_title);
+//        mType = (TextView) findViewById(R.id.tv_videoInfo_type);
+//        mType1 = (TextView) findViewById(R.id.tv_videoInfo_type1);
+//        mType2 = (TextView) findViewById(R.id.tv_videoInfo_type2);
+//        mType3 = (TextView) findViewById(R.id.tv_videoInfo_type3);
+//        mType4 = (TextView) findViewById(R.id.tv_videoInfo_type4);
+//        textViews = new TextView[]{mType1, mType2, mType3, mType4};
+//        mTime = (TextView) findViewById(R.id.tv_videoInfo_time);
+//        mMessage = (TextView) findViewById(R.id.tv_videoInfo_message);
 
-        mPlay.setImageURI(Uri.parse(mDataBean.getCover().getDetail()));
-        mBlurred.setImageURI(Uri.parse(mDataBean.getCover().getBlurred()));
-        mTitle.setText(mDataBean.getTitle());
-        mType.setText(mDataBean.getCategory());
-        for(int i=0;i<mDataBean.getTags().size();i++){
-            if(i<=3){
+        draweeVideoInfoPlay.setImageURI(Uri.parse(mDataBean.getCover().getDetail()));
+        draweeVideoInfoBlurred.setImageURI(Uri.parse(mDataBean.getCover().getBlurred()));
+        tvVideoInfoTitle.setText(mDataBean.getTitle());
+        tvVideoInfoType.setText(mDataBean.getCategory());
+        textViews = new  TextView[]{tvVideoInfoType1, tvVideoInfoType2, tvVideoInfoType3, tvVideoInfoType4};
+        for (int i = 0; i < mDataBean.getTags().size(); i++) {
+            if (i <= 3) {
                 textViews[i].setText(mDataBean.getTags().get(i).getName());
             }
 
@@ -88,76 +105,73 @@ public class VideoInfoActivity extends BaseActivity {
 //        mType2.setText(mDataBean.getTags().get(1).getName());
 //        mType3.setText(mDataBean.getTags().get(2).getName());
 //        mType4.setText(mDataBean.getTags().get(3)==null?"":mDataBean.getTags().get(3).getName());
-        mTime.setText(ToTimeString.toTimeString(mDataBean.getDuration()));
-        mMessage.setText(mDataBean.getDescription());
+        tvVideoInfoTime.setText(ToTimeString.toTimeString(mDataBean.getDuration()));
+        tvVideoInfoMessage.setText(mDataBean.getDescription());
 
-        mPlay.setOnClickListener(new View.OnClickListener() {
+        draweeVideoInfoPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VideoInfoActivity.this, PlayVideoActivity.class);
-                intent.putExtra("URL", mDataBean.getPlayInfo().get(0).getUrl());
-                startActivity(intent);
+//                Intent intent = new Intent(VideoInfoActivity.this, PlayVideoActivity.class);
+//                intent.putExtra("URL", mDataBean.getPlayUrl());
+//                startActivity(intent);
 //                videoItemView.start(mDataBean.getPlayInfo().get(0).getUrl());
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                Intent intent = new Intent(VideoInfoActivity.this, PLPlayerActivity.class);
+                intent.putExtra("URL", mDataBean.getPlayUrl());
+                startActivity(intent);
             }
         });
 
 
-        fullScreen = (FrameLayout) findViewById(R.id.full_screen);
-        videoItemView = new VideoPlayView(this);
+//        videoItemView = new VideoPlayView(this);
 
     }
 
-    /**
-     * 初始化标题栏
-     */
-    private void initToolBar() {
-        setTitle("精选视频");
-        setIsShowBack(true);
-    }
+
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        videoItemView.stop();
-        videoItemView.release();
-        videoItemView.onDestroy();
-        videoItemView = null;
+//        videoItemView.stop();
+//        videoItemView.release();
+//        videoItemView.onDestroy();
+//        videoItemView = null;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (videoItemView != null) {
-            videoItemView.stop();
-        }
+//        if (videoItemView != null) {
+//            videoItemView.stop();
+//        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Log.e("VideoActivity","转屏监听");
-        if (videoItemView != null) {
-            videoItemView.onChanged(newConfig);
-            if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-                fullScreen.setVisibility(View.GONE);
+        Log.e("VideoActivity", "转屏监听");
+//        if (videoItemView != null) {
+//            videoItemView.onChanged(newConfig);
+//            if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+//                fullScreen.setVisibility(View.GONE);
+//
+//
+//                videoItemView.setContorllerVisiable();
+//            } else {
+//                ViewGroup viewGroup = (ViewGroup) videoItemView.getParent();
+//                if (viewGroup == null)
+//                    return;
+//                viewGroup.removeAllViews();
+//                fullScreen.addView(videoItemView);
+//
+//                fullScreen.setVisibility(View.VISIBLE);
+//            }
+//        } else {
 
-
-                videoItemView.setContorllerVisiable();
-            } else {
-                ViewGroup viewGroup = (ViewGroup) videoItemView.getParent();
-                if (viewGroup == null)
-                    return;
-                viewGroup.removeAllViews();
-                fullScreen.addView(videoItemView);
-
-                fullScreen.setVisibility(View.VISIBLE);
-            }
-        } else {
-
-            fullScreen.setVisibility(View.GONE);
-        }
+//            fullScreen.setVisibility(View.GONE);
+//        }
     }
 
 
