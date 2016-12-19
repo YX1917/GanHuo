@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center" />
-
     <ProgressBar
         android:id="@+id/LoadingView"
         android:layout_width="wrap_content"
@@ -20,14 +19,14 @@
         android:layout_marginRight="5dp"/>
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/operation_volume_brightness"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="#00000000"
         android:orientation="horizontal"
-        android:padding="0dip"
-        android:visibility="invisible">
+        >
 
         <ImageView
             android:id="@+id/operation_bg"
@@ -36,28 +35,44 @@
             android:layout_centerInParent="true"
             android:src="@drawable/video_volumn_bg"/>
 
-        <FrameLayout
-            android:layout_width="wrap_content"
+        <!--<FrameLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/operation_bg"-->
+            <!--android:paddingTop="20dp"-->
+            <!--&gt;-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/operation_full"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left"-->
+                <!--android:src="@drawable/video_num_bg"/>-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/operation_percent"-->
+                <!--android:layout_width="0dip"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="left"-->
+                <!--android:scaleType="matrix"-->
+                <!--android:src="@drawable/video_num_front"/>-->
+        <!--</FrameLayout>-->
+
+        <SeekBar
+            android:id="@+id/seekbar_setting"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/operation_bg"
-            android:paddingTop="20dp"
-            >
+            android:layout_marginTop="5dp"
+            style="@style/Base.Widget.AppCompat.SeekBar"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:max="100"
+            android:progressDrawable="@drawable/bg_seek"
+            android:thumb="@drawable/bg_thumb"
+            android:thumbOffset="10dp"
 
-            <ImageView
-                android:id="@+id/operation_full"
-                android:layout_width="94dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:src="@drawable/video_num_bg"/>
-
-            <ImageView
-                android:id="@+id/operation_percent"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:scaleType="matrix"
-                android:src="@drawable/video_num_front"/>
-        </FrameLayout>
+            />
     </RelativeLayout>
 
 </RelativeLayout>
