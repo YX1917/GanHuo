@@ -16,7 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.yx.personal.ganhuo.R;
-import com.yx.personal.ganhuo.cudtomView.CopyMediaController;
+//import com.yx.personal.ganhuo.cudtomView.CopyMediaController;
 import com.yx.personal.ganhuo.cudtomView.MediaController;
 
 import butterknife.BindView;
@@ -65,7 +65,7 @@ public class PLPlayerActivity extends AppCompatActivity {
         PLVideoView.setDisplayAspectRatio(PLVideoView.ASPECT_RATIO_FIT_PARENT);
         PLVideoView.setBufferingIndicator(LoadingView);
         MediaController mediaController = new MediaController(this);
-        CopyMediaController copyMediaController = new CopyMediaController(this);
+//        CopyMediaController copyMediaController = new CopyMediaController(this);
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mMaxVolume = mAudioManager
