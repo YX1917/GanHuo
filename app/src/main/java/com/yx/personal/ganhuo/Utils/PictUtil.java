@@ -1,12 +1,15 @@
 package com.yx.personal.ganhuo.utils;
 
 import android.os.Environment;
+import android.util.Log;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Ted on 2015/8/30.
@@ -26,6 +29,7 @@ public class PictUtil {
             }
             return true;
         } catch (Exception e) {
+            Log.e(TAG, "saveFile: " + e.getMessage());
             e.printStackTrace();
             return false;
         } finally {

@@ -25,6 +25,8 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by YX on 16/7/14.
  */
@@ -110,9 +112,11 @@ public class RetrofitManger {
             Response originalResponse = chain.proceed(request);
             if (NetUtil.isNetworkConnected()) {
                 //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
+                Log.e(TAG, "intercept: " + "有网络");
                 String cacheControl = request.cacheControl().toString();
                 return originalResponse.newBuilder().header("Cache-Control", cacheControl).removeHeader("Pragma").build();
             } else {
+                Log.e(TAG, "intercept: " + "无网络");
                 return originalResponse.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + CACHE_STALE_LONG).removeHeader("Pragma").build();
             }
         }

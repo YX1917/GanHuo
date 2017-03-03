@@ -49,6 +49,7 @@ public class PictureActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         initView();
         AppManager.getAppManager().addActivity(this);
+
     }
 
     private void initView() {
@@ -82,6 +83,7 @@ public class PictureActivity extends BaseActivity {
     private void saveImg() {
         FileBinaryResource resource = (FileBinaryResource) Fresco.getImagePipelineFactory().getMainDiskStorageCache().getResource(new SimpleCacheKey(url.toString()));
         File file = resource.getFile();
+
         if (PictUtil.saveFile(file)) {
             Toast.makeText(PictureActivity.this, "图片已保存", Toast.LENGTH_SHORT).show();
         } else {

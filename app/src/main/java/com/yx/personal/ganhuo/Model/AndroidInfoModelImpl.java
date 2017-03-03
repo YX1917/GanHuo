@@ -1,13 +1,17 @@
 package com.yx.personal.ganhuo.model;
 
+import android.util.Log;
+
 import com.yx.personal.ganhuo.GetDataListener;
 import com.yx.personal.ganhuo.bean.DataInfoBean;
 import com.yx.personal.ganhuo.contract.AndroidInfoContract;
 import com.yx.personal.ganhuo.netWork.RetrofitManger;
 
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by YX on 2016/11/29
@@ -24,9 +28,21 @@ public class AndroidInfoModelImpl implements AndroidInfoContract.Model {
                 .getAndroidInfo(10, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<DataInfoBean>() {
+                .subscribe(new Observer<DataInfoBean>() {
                     @Override
-                    public void call(DataInfoBean dataInfoBean) {
+                    public void onCompleted() {
+                        Log.e(TAG, "onCompleted: " + "");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.getMessage());
+                        getDataListener.failed(e);
+                    }
+
+                    @Override
+                    public void onNext(DataInfoBean dataInfoBean) {
+                        Log.e(TAG, "onNext: " + "");
                         if (mDataInfoBean == null) {
                             mDataInfoBean = dataInfoBean;
                         } else {
@@ -45,11 +61,6 @@ public class AndroidInfoModelImpl implements AndroidInfoContract.Model {
 
                         }
                         getDataListener.success(mDataInfoBean);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        getDataListener.failed(throwable);
                     }
                 });
     }
